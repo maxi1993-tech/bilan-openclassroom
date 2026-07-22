@@ -1,6 +1,5 @@
-# Sorties générées, régénérables depuis les blocs
-99-bilan-final.md
-99-bilan-final-lisible.md
+# Les bilans finaux sont suivis par Git : ils sont ce qui reste après clôture
+# d'un projet, quand les blocs sources sont supprimés. Ne pas les ignorer.
 
 # Sauvegardes internes de travail
 **/.sauv*.md

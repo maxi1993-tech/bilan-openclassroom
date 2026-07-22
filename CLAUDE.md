@@ -194,7 +194,7 @@ Quand un projet est terminé et validé, il ne reste que `99-bilan-final.md` et 
 **Trois conditions, dans cet ordre. Aucune ne se saute.**
 
 1. **Max le déclare terminé explicitement.** Claude ne décide jamais qu'un projet est fini, même si tout semble coché.
-2. **Les deux fichiers finaux sont suivis par Git.** Ils sont actuellement dans `.gitignore` : tant que ces deux lignes y sont, la clôture supprime le projet au lieu de l'archiver. Retirer les lignes, committer, vérifier avec `git ls-files pXX/`.
+2. **Les deux fichiers finaux sont suivis par Git.** Vérifier avec `git ls-files pXX/` avant toute suppression. Ils ont été retirés du `.gitignore` le 22 juillet 2026, précisément pour que la clôture archive le projet au lieu de le faire disparaître.
 3. **Régénérer puis vérifier.** Lancer `build-final.sh` et `build-lisible.py`, puis contrôler qu'aucune ligne des blocs sources n'est absente des deux finaux. Comparaison ligne à ligne, pas au jugé.
 
 Ensuite seulement, suppression, avec confirmation de Max fichier par fichier.

@@ -22,7 +22,7 @@ def sections(path):
 S = {}
 for f in ["00-cadrage.md","01-journal.md","02-bugs.md","03-connaissances.md",
           "04-choix-techniques.md","05-bilan.md","06-git.md","07-synthese.md",
-          "08-soutenance.md","09-memo.md","10-point-de-reprise.md"]:
+          "08-soutenance.md","09-memo.md","10-point-de-reprise.md","11-a-verifier.md"]:
     S.update(sections(f))
 
 verif = S.get("🔍 Vérification", "")
@@ -101,6 +101,8 @@ A("\n### Commits\n"); A(S.get("Commit",""))
 if S.get("🎤 Préparation soutenance","").strip():
     A("\n### Préparation soutenance\n"); A(S.get("🎤 Préparation soutenance",""))
 A("\n### Point de reprise\n"); A(S.get("📝 Point de reprise",""))
+if S.get("🔎 À vérifier","").strip():
+    A("\n### À vérifier, relevé au rangement\n"); A(S.get("🔎 À vérifier",""))
 
 open("99-bilan-final-lisible.md","w",encoding="utf-8").write("\n".join(p).rstrip()+"\n")
 print("genere", P + "/99-bilan-final-lisible.md")
