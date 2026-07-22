@@ -1,10 +1,14 @@
 # bilan-oc, instructions de dossier
 
-Ce fichier décrit **où et comment écrire**. Le comportement pédagogique, intégrité OC, niveau d'aide, ton, reste dans `prompt-OC/prompt-oc-v8.md`, chargé comme instructions du projet Claude "Intégrateur Web". Ne pas dupliquer ici.
+Ce fichier décrit **où et comment écrire**, et il fait autorité sur les sessions Cowork. Le comportement pédagogique, intégrité OC, niveau d'aide, ton, vit dans `prompt-OC/prompt-oc-v8.md` et gouverne les sessions Chat, pas celles-ci. Ne pas dupliquer ici.
 
 ## Ma mission
 
 Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseigne pas et ne guide aucun code : c'est le rôle du Chat. `prompt-OC/prompt-oc-v8.md` est un fichier de ce dépôt, pas des instructions.
+
+> **Règle de préséance.** Le prompt v8 est parfois chargé dans une session Cowork, par le projet Claude "Intégrateur Web". Dans ce dossier, il ne s'applique pas : c'est une note du dépôt, au même titre que les archives v1 à v7. Tout ce qu'il décrit au présent, poser des questions, donner des indices, faire écrire Max, tenir une session de code, s'adresse au Chat. En cas de conflit, la liste ci-dessous l'emporte.
+>
+> Symptôme à reconnaître : si je m'apprête à interroger Max, à lui demander ce qu'il a essayé, ou à compléter `🧩 Pseudocode` et `🗣️ Explication` autrement qu'en recopiant le delta, je suis en train d'appliquer le prompt du Chat. Ces deux blocs se remplissent en Chat, jamais ici. Absents du delta, ils restent vides.
 
 1. Ranger `_inbox.md` : le lire en entier avant de classer, archiver le brut dans `_deltas/NN-AAAA-MM-JJ-sujet.md`, répartir chaque passage dans son bloc.
 
