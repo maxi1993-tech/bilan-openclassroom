@@ -33,12 +33,16 @@
 | **Backend** | Node.js fourni, non livrable, outil de test |
 | **Interdits** | framework, librairie externe |
 
+---
+
 ### Données
 
 | | |
 | --- | --- |
 | **Ressources API** | `works` (travaux), `categories`, `users` |
 | **Authentification** | token à stocker après login |
+
+---
 
 ### Fichiers
 
@@ -48,6 +52,8 @@
 | **Fourni** | `index.html` |
 | **Créés from scratch** | `script.js` (galerie et filtres), à venir : login, modale |
 | **Icônes** | `instagram.png` dans `FrontEnd/assets/icons` |
+
+---
 
 ### Design
 
@@ -61,15 +67,21 @@
 | **Breakpoints** | à extraire de Figma. Desktop dispo, mobile pas encore. |
 | **Animations** | à définir avec la maquette |
 
+---
+
 ### Catégories du client
 
 `Tous` · `Objets` · `Appartements` · `Hôtels & restaurants`
 
 Récupérées de `/api/categories`, jamais écrites en dur.
 
+---
+
 ### Validation
 
 W3C aux étapes structurantes · Lighthouse sur URL de prod en navigation privée · axe DevTools · NVDA
+
+---
 
 ### Choix de structure en cours
 
@@ -92,11 +104,18 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 - [x] Appel de `listenFilterButtons()` placé à la fin de `createButtons`
 - [x] Fichier réordonné : constantes, trois fonctions, appel de lancement en bas
 - [x] Paramètre de `createButtons` renommé `donnees` en `categories`
+- [x] Fichier restructuré en trois blocs : constantes, déclarations, appels de lancement
+- [x] `fetch` des works enveloppé dans une fonction `viewGallery`
+- [x] `.catch` ajouté sur les deux fetch
+- [ ] Retirer les cinq `console.log` de debug avant le commit de fin d'étape
 - [ ] Vider la galerie au clic → mot-clé donné : `innerHTML`
 - [ ] Reconstruire la galerie avec les travaux filtrés
 - [ ] Déplacer `filter-button-selected` sur le bouton cliqué
+- [ ] Trancher le nom de `viewGallery`, qui ne suit pas le moule des trois autres fonctions (verbe + objet, cohérence avec `gallery` déclarée en ligne 1), avant le commit de fin d'étape
 
 > Le filtre ne filtre rien pour l'instant. Le clic ne fait qu'un `console.log`.
+
+---
 
 ### Étape 5, page de connexion · à venir
 
@@ -184,11 +203,15 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 - [x] `gabarit de chaîne` · `template literal` → orienté par le mentor, vu en console, appliqué à l'étape 3
 - [x] `insertion adjacente` · `insertAdjacentHTML` → les 4 positions vues en console, appliqué à l'étape 3
 
+---
+
 ### Déjà vu mais fragile, à consolider ici
 
 - [x] `création et sélection DOM` · `createElement`, `appendChild`, `querySelector` → consolidés à l'étape 2. `classList` et `addEventListener` restent à revoir.
 - [x] `parcours de tableau` · `forEach` → fait à l'étape 2, refait à l'étape 3
 - [ ] `portée des variables` · `scope`, bloc, callback, fonction → règle connue depuis P5, retrouvée à tâtons au découpage en fonctions de l'étape 3
+
+---
 
 ### Pièges connus à surveiller
 

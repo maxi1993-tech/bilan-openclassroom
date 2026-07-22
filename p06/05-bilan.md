@@ -33,6 +33,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 | étape 4 | `index.html` | 0 | 1 | `#introduction` : un `h2` dans un `article` titre l'`article`, pas la `section`. Code fourni OC, non corrigé, justifiable. |
 | étape 4 | `style.css` | 0 | 0 | |
 
+---
+
 ### Lighthouse
 
 À passer sur l'URL de production, en navigation privée, jamais sur Live Server.
@@ -40,6 +42,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 | Date | Perf | Accessibilité | Bonnes pratiques | SEO | Note |
 | --- | --- | --- | --- | --- | --- |
 | | | | | | pas encore passé, GitHub Pages non configuré |
+
+---
 
 ### Accessibilité
 
@@ -70,16 +74,26 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 - [x] Chaque bouton renvoie bien le sien au clic, `console.log(button)`, jamais le voisin
 - [x] Le clic log toujours le bon bouton après l'extraction dans `listenFilterButtons`
 - [x] Les boutons s'affichent toujours après le renommage du paramètre en `categories`
+- [x] Ordre réel d'exécution du fichier prouvé en console avec un repère de fin de fichier
+- [x] Les deux `.catch` attrapent bien leurs erreurs, back-end coupé, plus aucun `Uncaught`
+- [x] Galerie et boutons toujours affichés après la réorganisation en trois blocs
+
+---
 
 ### Preuve obtenue par l'échec
 
 - [x] Vérifié que les trois appels groupés en bas du fichier ne fonctionnent pas. Testé, console muette, aucune erreur.
+- [x] `try / catch` inopérant sur une erreur asynchrone, prouvé hors projet puis sur le projet
+
+---
 
 ### En attente
 
 - [ ] Le clic sur un filtre affiche les bons travaux
 - [ ] Un seul bouton porte `filter-button-selected` à tout moment
 - [ ] Boutons de filtre atteignables au clavier, focus visible
+- [ ] Contraste de l'état actif
+- [ ] axe DevTools
 - [ ] Le login redirige si OK, affiche une erreur si KO
 - [ ] Le token est bien stocké
 - [ ] Le mode connecté change l'affichage attendu
@@ -139,6 +153,17 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 - Bloc des écouteurs réexpliqué avec mes mots, sans le code sous les yeux.
 - Deux notions pointées par le mentor découvertes en console et reformulées avec mes mots.
 - Refactor en deux fonctions mené jusqu'au bout sans casser le rendu.
+- Structure cible du fichier en trois blocs proposée par moi, avec sa justification : lire le fichier dans l'ordre de la chronologie.
+- Identification seul que `createButtons` et `listenFilterButtons` n'ont pas leur place dans le bloc des appels.
+- Ordre d'exécution prouvé par l'observation, pas admis : repère de fin de fichier, lecture de la sortie, conclusion formulée avec mes mots.
+- Chaîne complète des trois appels reconstituée seul.
+- `setTimeout` compris par comparaison A, C, B, sans explication préalable.
+- Lien fait seul entre le `setTimeout` de l'exercice et le `fetch` du projet.
+- Place du `.catch` dans la chaîne trouvée seul, à partir de la forme des `.then`.
+- Second `.catch` posé seul sur `viewGallery`, sans indication.
+- Touche `s` de `git add --patch` trouvée seul en lisant l'aide.
+- Refus de créer les boutons en dur après relecture du brief.
+- Question posée seul sur la légitimité de la dépendance entre fonctions, au lieu de subir la structure.
 
 ---
 
@@ -176,6 +201,15 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 - Mise en ligne GitHub Pages, structure `FrontEnd/` en sous-dossier contre racine servie par Pages.
 - Formulation des messages de commit en anglais, accords et ordre des mots, plusieurs allers-retours.
 
+**Étape 4, session ordre d'exécution**
+
+- Distinction entre paramètre et variable non acquise malgré deux preuves console.
+- Réflexe de déplacer des blocs de code au jugé quand une question reste sans réponse, au lieu de s'arrêter.
+- `console.log` placé autour de l'appel plutôt que dans la fonction, puis appel de la fonction dans elle-même : deux bugs déjà rencontrés, non reconnus.
+- Réflexe "je sais pas" encore présent, y compris sur des points déjà notés en fiche.
+- `git add --patch` abandonné en cours de route, séquence vécue comme confuse.
+- Difficulté persistante à accepter une chronologie qui ne suit pas l'ordre de lecture du fichier.
+
 ---
 
 ### ➡️ À revoir, par priorité
@@ -184,11 +218,14 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 **Priorité 1, bloquant pour l'étape 4**
 
-- Ordre d'exécution asynchrone, sur exo dédié hors projet, à froid.
+- ~~Ordre d'exécution asynchrone~~ **résolu le 22-07**, prouvé par observation. Reste à consolider à froid.
+- `async / await`, sur exo dédié hors projet. Demandé plusieurs fois en session, volontairement reporté.
 - `event.target` et l'écouteur unique sur conteneur, sur exo dédié.
 
 **Priorité 2, notions à consolider**
 
+- Paramètre contre variable, le vocabulaire, sur exo dédié à froid.
+- `git add --patch`, touche `e`, sur dépôt bac à sable.
 - Le paramètre de callback dans un `forEach`, sur exo hors projet.
 - `querySelector` contre `querySelectorAll`, réflexe à ancrer.
 - Passage d'une valeur en paramètre.
@@ -223,6 +260,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 12. Peux-tu m'aider à revoir mon prompt Claude, voire m'en proposer ta version ? Le cadre actuel n'a pas tenu en session, l'aide arrive encore trop vite.
 
+---
+
 ### Sur l'architecture du code
 
 10. Brancher les écouteurs de clic depuis `createButtons` est imposé par le timing du `fetch`. Est-ce la pratique attendue, ou existe-t-il une organisation plus propre en agence ?
@@ -237,6 +276,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 1. `localStorage` ou `sessionStorage` pour le token, quelle pratique attendue ?
 
+---
+
 ### Sur la sémantique et l'accessibilité
 
 3. L'`alt` de la galerie vaut `work.title`, qui vient de l'API en anglais. Acceptable pour l'accessibilité, ou faut-il autre chose ?
@@ -247,10 +288,30 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 7. L'état visuel du filtre actif (`filter-selected` de la maquette) : plutôt une classe posée en JS, ou une autre approche attendue ?
 
+---
+
 ### Sur le livrable
 
 2. Le backend fourni doit-il rester dans mon repo, ou seul le front-end est attendu comme livrable ?
 
 4. GitHub Pages : `index.html` est dans `FrontEnd/`. Quelle structure recommandée, remonter à la racine ou dossier `docs/` ?
+
+---
+
+### Sur l'asynchrone et la gestion d'erreur
+
+16. L'ordre de lecture d'un fichier ne correspond pas à son ordre d'exécution dès qu'il y a un fetch. Est-ce que ça reste difficile avec l'expérience, ou est-ce qu'on finit par lire un fichier asynchrone naturellement ?
+
+17. `async / await` est présenté comme permettant d'écrire l'attente dans l'ordre. En agence, qu'est-ce qui est attendu sur ce type de projet : `.then` ou `async / await` ?
+
+18. Gestion d'erreur : un `.catch` avec un simple `console.log` suffit-il pour ce livrable, ou attends-tu un message affiché à l'utilisateur ?
+
+---
+
+### Sur Git
+
+19. Quand deux sujets se croisent sur les mêmes lignes, comment tu fais concrètement pour garder un historique de commits propre ?
+
+20. Les `console.log` de debug : tu les acceptes dans des commits intermédiaires, ou tu attends un historique sans aucune trace de debug ?
 
 ---

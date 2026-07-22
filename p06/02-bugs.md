@@ -229,3 +229,49 @@
 > **Absence d'erreur ne veut pas dire absence de bug.** Le bug le plus long de l'étape 4 n'a produit aucun message rouge.
 
 ---
+
+**`console.log` écrit autour de l'appel au lieu d'être dans la fonction** · `console.log(viewGallery())`
+
+- **Cause** · confusion entre observer une fonction et afficher ce qu'elle retourne.
+- **Correction** · placer le `console.log` en première instruction du corps, entre les accolades.
+
+> Preuve obtenue en console · une fonction sans `return` affiche `undefined`, règle déjà notée à l'étape 2.
+
+---
+
+**Appel d'une fonction écrit à l'intérieur d'elle-même** · `function viewGallery() { console.log(viewGallery()) ... }`
+
+- **Cause** · répétition du bug déjà rencontré sur `createButtons`.
+- **Correction** · mettre une chaîne de texte dans le `console.log`, pas un appel.
+
+---
+
+**`try / catch` autour des appels de lancement, `console.error` jamais affiché** · aucun message d'erreur, aucun `attrapé`
+
+- **Cause** · le bloc `try / catch` s'exécute et se referme à t = 0. Les erreurs du fetch arrivent à t = 200 ms, quand plus rien n'écoute.
+- **Correction** · `.catch()` accroché à la chaîne des `.then`.
+
+> Preuve obtenue en console, hors projet · `try { console.log("dans le try"); alerteInexistante() } catch (e) { console.log("attrapé") }` affiche `attrapé`. La même chose avec l'erreur enfermée dans un `setTimeout` de 1 seconde ne l'affiche pas.
+
+---
+
+**Appels de lancement déplacés dans `createButtons`** · plus rien ne démarre
+
+- **Cause** · déplacement de bloc au jugé, sans repartir de la chronologie.
+- **Correction** · retour au fichier précédent. Réflexe à prendre : ne pas déplacer de code tant que la question posée n'est pas résolue.
+
+---
+
+**`try / catch` refermé autour d'une déclaration de fonction** · sortie console identique aux essais précédents
+
+- **Cause** · un bloc de déclarations n'exécute rien, donc rien à attraper.
+- **Correction** · sujet clos, `.catch` retenu.
+
+---
+
+**`git add --patch` puis `q`, blocs déjà stagés conservés**
+
+- **Cause** · `q` quitte l'outil mais ne dé-stage pas ce qui a été validé avec `y`. Information donnée à tort en session comme étant l'inverse.
+- **Correction** · `git reset` vide la zone de préparation sans toucher aux fichiers.
+
+---

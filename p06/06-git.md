@@ -15,15 +15,23 @@ Six commits, un sujet par commit.
 
 **Étape 3** · trois commits atomiques, un par nature de changement : la fonctionnalité, le refactor, le style.
 
+**Étape 4**
+
+| Hash | Type | Message | Traduction |
+| --- | --- | --- | --- |
+| `87ad631` | `wip` | reorganize file and handle fetch errors | réorganiser le fichier et gérer les erreurs |
+| `b78f0d1` | `feat` | rename filter-button and listen to filter clicks | renommer filter-button et écouter le clic sur les filtres |
+
+> `87ad631` est un `wip:` assumé · réorganisation et gestion d'erreur se croisent sur les mêmes lignes, `git add --patch` n'a pas permis de les séparer proprement. Justification dans `04-choix-techniques.md`.
+
 ---
 
 ## État Git
 
 **Branche** `main`, à jour avec `origin/main`.
 
-**Étape 4** · rien de commité. Modifications en attente dans `script.js` et `style.css`.
+**Étape 4** · tout est commité et poussé.
 
-> **Commit reporté volontairement** · je ne commite pas un code que je ne sais pas encore expliquer en entier.
-> À surveiller : plus l'attente dure, plus le commit sera gros et difficile à découper en sujets uniques.
+> Cinq `console.log` de debug conservés volontairement dans le fichier commité, à retirer avant le commit de fin d'étape.
 
 ---

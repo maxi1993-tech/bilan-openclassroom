@@ -49,5 +49,17 @@
 ### Justifier la méthode
 
 - [~] L'usage de Git et des commits → historique propre, format conventionnel, un commit atomique par sujet
+- [ ] Justifier le commit `wip:` plutôt que deux commits séparés
+
+---
+
+### Expliquer l'asynchrone et la gestion d'erreur
+
+- [ ] Expliquer l'ordre réel d'exécution du fichier, avec le repère de fin de fichier comme preuve
+- [ ] Expliquer pourquoi un `try / catch` ne peut pas attraper une erreur de fetch
+- [ ] Expliquer ce que signifie `Uncaught (in promise)` et comment le faire disparaître
+- [ ] Justifier la structure du fichier en trois blocs
+- [ ] Justifier le fait de ne pas créer les boutons avant le retour du fetch
+- [ ] Expliquer le rôle du paramètre `categories` et d'où vient sa valeur
 
 ---

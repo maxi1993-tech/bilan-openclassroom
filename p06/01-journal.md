@@ -79,7 +79,6 @@ Pour un travail :
 
 ---
 
-
 ## 🗣️ Explication ligne par ligne
 
 > Ce bloc ne contient que tes mots, sans le code sous les yeux.
@@ -145,6 +144,18 @@ Permet de placer les balises et de les interpréter en code HTML avec le contenu
 - pourquoi `fetchCategories()` est appelée à la main et pas `createButtons`
 - ce qui se passe dans l'ordre entre le chargement de la page et l'affichage des boutons
 - pourquoi `Tous` est inséré avec `afterbegin` et les catégories avec `beforeend`
+
+**Pourquoi `listenFilterButtons()` est appelée depuis `createButtons` et pas en bas du fichier :**
+
+`viewGallery` s'affiche avant "fin du fichier", `listenFilterButtons` s'affiche après. Entre les deux, les données du fetch sont arrivées. Cela crée les boutons quand les données sont reçues, et ensuite écoute. `listenFilterButtons` fonctionne quand les boutons sont créés, ce qui n'arrive pas avant que les données soient arrivées et déclenchent `createButtons`.
+
+**La chaîne des appels :**
+
+`fetchCategories()` en bas du fichier appelle la fonction `fetchCategories`, qui appelle `createButtons`, qui appelle `listenFilterButtons`.
+
+**Pourquoi le `try / catch` n'attrape rien :**
+
+L'erreur n'a pas le temps d'arriver que le script a terminé.
 
 ### Étape 4, à alimenter à froid
 

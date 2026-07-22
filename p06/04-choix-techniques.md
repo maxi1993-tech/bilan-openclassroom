@@ -39,6 +39,12 @@ Permet un `src="script.js"` simple, même dossier.
 
 ---
 
+**`git add --patch` tenté pour séparer réorganisation et gestion d'erreur en deux commits, puis abandonné**
+
+Les deux sujets se croisent physiquement sur les mêmes lignes. Séparer proprement aurait demandé l'édition manuelle d'un bloc (`e`), manipulation risquée en fin de session. Commit unique `wip:` assumé, avec sa justification.
+
+---
+
 ### API et structure du code
 
 **Chaîne `.then` plutôt que `async / await`**
@@ -118,6 +124,58 @@ Contrainte du `fetch`, pas un choix de style. En bas, la ligne s'exécute avant 
 **Ordre du fichier** · constantes, trois déclarations de fonctions, appel de lancement seul en bas
 
 On ne lit jamais un appel avant d'avoir vu la fonction.
+
+---
+
+**Fichier réordonné en trois blocs** · constantes, puis les quatre déclarations de fonctions, puis les deux appels de lancement en bas
+
+On lit le fichier dans l'ordre de la chronologie d'exécution, sans jamais remonter. Les déclarations du bloc du milieu n'exécutent rien.
+
+---
+
+**`createButtons` et `listenFilterButtons` absentes du bloc des appels**
+
+Elles sont déjà appelées par le chaînage, au moment où leurs données existent. Seuls les points de départ figurent en bas.
+
+---
+
+**`fetch` des works enveloppé dans `viewGallery`**
+
+Aligne le fichier sur la même forme que les trois autres traitements. Ce n'est pas un simple déplacement de lignes : enveloppé, le fetch ne part plus à la lecture du fichier mais à l'appel.
+
+---
+
+**Créer les boutons avant le retour du fetch, puis les remplir** · écarté
+
+Le nombre de boutons dépend des données autant que leur nom : à t = 0 on ne sait pas combien de catégories l'API va renvoyer. Deux étapes au lieu d'une, sans rien gagner.
+
+---
+
+**Écrire les catégories en dur** · écarté
+
+Non conforme au brief, qui demande "les catégories présentes dans l'API".
+
+---
+
+**`async / await` pour supprimer la dépendance au fetch** · écarté à ce stade
+
+Ça change l'écriture de l'attente, pas son existence. Réécrire dans une syntaxe non maîtrisée ferait perdre la compréhension acquise sur `.then`.
+
+---
+
+### Gestion d'erreur
+
+**`try / catch` autour des appels de lancement** · testé puis écarté
+
+Il finit son travail avant que l'erreur du fetch n'existe. Prouvé en console : `try`, `bonjour`, `bonjour un`, `fin du fichier`, puis seulement les erreurs réseau. Le `console.error` du `catch` ne s'affiche jamais.
+
+---
+
+**`.catch()` accroché à la chaîne des `.then`**
+
+C'est le seul endroit encore actif au retour du fetch.
+
+> Preuve · la mention `Uncaught (in promise)` disparaît de l'erreur une fois le `.catch` posé.
 
 ---
 
