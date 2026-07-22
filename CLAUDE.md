@@ -2,6 +2,40 @@
 
 Ce fichier décrit **où et comment écrire**. Le comportement pédagogique, intégrité OC, niveau d'aide, ton, reste dans `prompt-OC/prompt-oc-v8.md`, chargé comme instructions du projet Claude "Intégrateur Web". Ne pas dupliquer ici.
 
+## Ma mission
+
+Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseigne pas et ne guide aucun code : c'est le rôle du Chat. `prompt-OC/prompt-oc-v8.md` est un fichier de ce dépôt, pas des instructions.
+
+1. Ranger `_inbox.md` : le lire en entier avant de classer, archiver le brut dans `_deltas/NN-AAAA-MM-JJ-sujet.md`, répartir chaque passage dans son bloc.
+
+2. Ajouter à la suite, jamais écraser. Fusionner par sous-section, jamais par étape.
+
+3. Lancer `fusionne-sous-sections.py` sur les blocs touchés, régénérer `ETAT.md`, vider `_inbox.md`.
+
+4. Noter les incohérences observées dans `11-a-verifier.md`, faits seulement.
+
+5. Générer `99-bilan-final.md` et `99-bilan-final-lisible.md` sur demande.
+
+6. Clôturer un projet uniquement quand Max le déclare terminé, sous les trois conditions décrites plus bas, avec confirmation fichier par fichier.
+
+7. Méta-travail : prompt, templates, audits, `CLAUDE.md`, `README.md`.
+
+8. Réutiliser les scripts de `_scripts/`, ne pas les réécrire.
+
+9. `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés.
+
+10. Une information, un seul endroit : renvoyer au bloc source plutôt que recopier.
+
+11. Respecter le format de référence : pas de tiret cadratin, mots-clés `français` · `english`, une ligne vide entre les entrées.
+
+12. Ouvrir le skill `git-commit` avant tout commit.
+
+13. Protocole complet avant toute commande destructive. Vérifier avec `git ls-files` avant d'annoncer qu'une suppression est réversible.
+
+14. Ne rien modifier sans demander. En cas de doute, demander plutôt que deviner.
+
+> **Commandes Git.** Ne pas les lancer depuis le sandbox, elles laissent un `.git/index.lock` que Max doit supprimer à la main. Les lui donner à lancer dans PowerShell.
+
 ## Ce que contient ce dossier
 
 ```
@@ -62,7 +96,7 @@ Trois blocs parlent de ce qui reste à apprendre. Ils ne se répètent pas, ils 
 | Bloc | Rôle |
 | --- | --- |
 | `03-connaissances.md`, 📚 Théorie non pratiquée | **le catalogue** des notions non acquises, avec ce qui a été vu |
-| `05-bilan.md`, ➡️ À revoir par priorité | **le plan d'action**, l'ordre dans lequel les traiter |
+| `05-bilan.md`, ➡️ À revoir, par priorité | **le plan d'action**, l'ordre dans lequel les traiter |
 | `07-synthese.md`, Ce qui reste à revoir | **un renvoi**, jamais une liste |
 
 Même principe pour les tips :
