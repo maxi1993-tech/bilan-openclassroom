@@ -27,26 +27,87 @@ for f in ["00-cadrage.md","01-journal.md","02-bugs.md","03-connaissances.md",
 
 verif = S.get("🔍 Vérification", "")
 faits = len(re.findall(r'- \[x\]', verif, re.I)); total = len(re.findall(r'- \[[ x]\]', verif, re.I))
-bugs  = len([l for l in S.get("🐛 Journal de bugs","").split("\n") if l.strip().startswith("- ")])
+bugs  = len([l for l in S.get("🐛 Journal de bugs","").split("\n") if l.strip().startswith("**")])
 conn  = len([l for l in S.get("🧠 Nouvelles connaissances","").split("\n") if l.strip().startswith("- ")])
 choix = len([l for l in S.get("🔍 Choix techniques","").split("\n") if l.strip().startswith("- ")])
 todo  = S.get("✅ Todo","")
 tf, tt = len(re.findall(r'- \[x\]', todo, re.I)), len(re.findall(r'- \[[ x]\]', todo, re.I))
 
 def bugs_table(txt):
-    out = []
-    for l in txt.split("\n"):
-        s = l.strip()
-        if s.startswith("**") and s.endswith("**"):
-            if out: out.append("")
-            out += [f"### {s.strip('*')}", "", "| Bug observé | Cause réelle | Correction |", "| --- | --- | --- |"]
-        elif s.startswith("- "):
-            parts = [p.strip() for p in s[2:].split("→")]
+    """Rend le journal de bugs en tableaux, un par sous-section ###.
+    Accents evites dans ce docstring, pas dans la sortie.
+    Format source attendu :
+        ### Titre de sous-section
+        **symptome** . detail facultatif
+        - **Cause** . ...
+        - **Correction** . ...
+        > preuve facultative
+    Toute ligne qui n'entre dans aucune de ces cases part en colonne Note,
+    prefixee de son etiquette : rien de la source ne doit disparaitre.
+    L'ancien format `- symptome -> cause -> correction` reste accepte.
+    """
+    def cell(x):
+        return " ".join(x.split()).replace("|", "\\|") if x else ""
+
+    out, rows, entry = [], [], None
+
+    def flush_entry():
+        if entry and any(entry.values()):
+            rows.append(entry.copy())
+
+    def flush_table():
+        if not rows:
+            return
+        note = any(r["note"] for r in rows)
+        head = ["Bug observé", "Cause réelle", "Correction"] + (["Note"] if note else [])
+        out.append("| " + " | ".join(head) + " |")
+        out.append("| " + " | ".join(["---"] * len(head)) + " |")
+        for r in rows:
+            cells = [r["sym"], r["cause"], r["corr"]] + ([r["note"]] if note else [])
+            out.append("| " + " | ".join(cell(c) for c in cells) + " |")
+        out.append("")
+        rows.clear()
+
+    for raw in txt.split("\n"):
+        l = raw.strip()
+        if not l or l == "---":
+            continue
+        if l.startswith("### "):
+            flush_entry(); entry = None; flush_table()
+            out.append("#### " + l[4:].strip()); out.append("")
+            continue
+        if l.startswith("**"):
+            flush_entry()
+            entry = {"sym": l, "cause": "", "corr": "", "note": ""}
+            continue
+        if l.startswith("- "):
+            body = l[2:]
+            m = re.match(r"\*\*(.+?)\*\*\s*[·:.-]?\s*(.*)", body)
+            if m and entry is not None:
+                label, val = m.group(1).strip().lower(), m.group(2).strip()
+                if label.startswith("cause"):
+                    entry["cause"] = (entry["cause"] + " " + val).strip(); continue
+                if label.startswith("correction"):
+                    entry["corr"] = (entry["corr"] + " " + val).strip(); continue
+                entry["note"] = (entry["note"] + " " + m.group(0)).strip(); continue
+            parts = [x.strip() for x in body.split("\u2192")]
             if len(parts) == 3:
-                out.append("| " + " | ".join(p.replace("|", "\\|") for p in parts) + " |")
+                flush_entry()
+                entry = {"sym": parts[0], "cause": parts[1], "corr": parts[2], "note": ""}
+                flush_entry(); entry = None
+            elif entry is not None:
+                entry["note"] = (entry["note"] + " " + body).strip()
             else:
-                out.append("| " + s[2:].replace("|", "\\|") + " | | |")
-    return "\n".join(out)
+                rows.append({"sym": body, "cause": "", "corr": "", "note": ""})
+            continue
+        if entry is not None:
+            entry["note"] = (entry["note"] + " " + l.lstrip("> ")).strip()
+        else:
+            out.append(l); out.append("")
+
+    flush_entry(); flush_table()
+    return "\n".join(out).strip()
+
 
 D = datetime.date.today().isoformat()
 p = []; A = p.append
@@ -98,6 +159,7 @@ A("\n### Todo détaillée\n"); A(todo)
 A("\n### Vérifications\n"); A(verif)
 A("\n### Validation outils\n"); A(S.get("📊 Validation outils",""))
 A("\n### Commits\n"); A(S.get("Commit",""))
+# "Etat Git" de 06-git.md est volontairement exclu : etat transitoire, pas un livrable.
 if S.get("🎤 Préparation soutenance","").strip():
     A("\n### Préparation soutenance\n"); A(S.get("🎤 Préparation soutenance",""))
 A("\n### Point de reprise\n"); A(S.get("📝 Point de reprise",""))

@@ -7,7 +7,14 @@ import re, sys, collections
 def fusionne(path):
     lines = open(path, encoding="utf-8").read().split("\n")
     h2 = [i for i, l in enumerate(lines) if l.startswith("## ")]
-    out = []
+    # Garde-fou 1 : un fichier sans titre de niveau 2 serait vide en sortie.
+    if not h2:
+        print("ignore, aucun titre ## :", path)
+        return
+    # Garde-fou 2 : tout ce qui precede le premier ## (titre H1, preambule)
+    # doit etre conserve, il etait supprime jusqu'ici.
+    tete = lines[:h2[0]]
+    out = list(tete)
     for n, s in enumerate(h2):
         e = h2[n+1] if n+1 < len(h2) else len(lines)
         bloc = lines[s:e]; titre = bloc[0]; corps = bloc[1:]
