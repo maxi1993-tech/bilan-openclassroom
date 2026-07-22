@@ -8,11 +8,31 @@ Ce fichier décrit **où et comment écrire**. Le comportement pédagogique (int
 CLAUDE.md        ce fichier
 ETAT.md          état du projet actif, court, à coller en Chat
 README.md        index des 12 projets
+.gitattributes   fins de ligne, LF dans le dépôt, natif sur le disque
 _scripts/        génération des bilans, à réutiliser, ne pas réécrire
 _template/       blocs vierges à copier pour un nouveau projet
 _archive/        fiches d'origine avant découpage
+prompt-OC/       prompt du projet Claude, templates chargés en contexte, audits
 p01/ ... p12/    un dossier par projet
 ```
+
+## prompt-OC/
+
+Le prompt qui gouverne les sessions Chat, et ses annexes. Ce dossier n'est pas un dossier projet.
+
+| Fichier | Rôle | Où il sert |
+| --- | --- | --- |
+| `prompt-oc-v8.md` | **version active** | instructions du projet Claude |
+| `fiche-template-minimal.md` | liste des blocs, qui les remplit | documents de contexte du projet |
+| `fiche-template-complet.md` | format exact de chaque bloc | documents de contexte du projet |
+| `preferences-personnalisees.md` | copie des préférences Claude | réglages Claude, tous projets |
+| `audits.md` | journal des échecs mesurés en session | ici, jamais chargé en contexte |
+| `evolution.md` | historique v1 à v8 | ici, jamais chargé en contexte |
+| `prompt-oc-v1.md` à `v7` | archives | ici, ne jamais modifier |
+
+**Une seule version active.** Une correction se fait dans `prompt-oc-v8.md`, jamais dans une archive. Une refonte crée `prompt-oc-v9.md` et laisse la v8 intacte.
+
+**`audits.md` ne se charge jamais en contexte.** Me donner mes échecs passés avant de m'auto-évaluer biaiserait l'audit. Max colle le résultat lui-même.
 
 ## Fichiers d'un projet
 

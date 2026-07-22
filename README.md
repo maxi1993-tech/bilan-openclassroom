@@ -28,3 +28,7 @@ Les intitulés P7 à P12 sont provisoires, à corriger quand OC les confirme.
 Ouvrir une session Cowork sur ce dossier. `CLAUDE.md` est lu automatiquement.
 
 Pour une question théorique rapide en Chat, coller `ETAT.md`.
+
+## prompt-OC/
+
+Le prompt du projet Claude "Intégrateur Web" et ses annexes. Version active : `prompt-oc-v8.md`. Les versions v1 à v7 sont archivées et ne se modifient jamais. Détail dans `CLAUDE.md`.
