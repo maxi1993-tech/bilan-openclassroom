@@ -46,25 +46,17 @@ README.md        index des 12 projets
 _scripts/        génération des bilans, à réutiliser, ne pas réécrire
 _template/       blocs vierges à copier pour un nouveau projet
 _archive/        vide. Réservé aux fiches d'origine d'un futur découpage.
-prompt-OC/       prompt du projet Claude et ses annexes
+prompt-OC/       le prompt du projet Claude et son histoire, rien d'autre
+templates/       ce qui décrit la fiche projet, chargé en contexte
+preferences/     préférences Claude, tous projets confondus
 p01/ ... p12/    un dossier par projet
 ```
 
+> **`_template/` et `templates/` ne sont pas la même chose.** `_template/` contient les blocs vierges à copier sur le disque pour démarrer un projet. `templates/` décrit ces blocs, ce qui va dedans et qui les remplit : il se charge en contexte, il ne se copie pas.
+
 ## prompt-OC/
 
-Le prompt qui gouverne les sessions Chat, et ses annexes. Ce dossier n'est pas un dossier projet.
-
-```
-prompt-OC/
-  prompt-oc-v8.md   version active
-  prompt-oc-v1..v7  archives
-  audits.md         journal des échecs
-  evolution.md      historique des versions
-  templates/        templates de fiche projet
-  preferences/      préférences Claude
-```
-
-**À la racine, le prompt et son histoire.**
+Le prompt qui gouverne les sessions Chat, et rien d'autre. Ce dossier n'est pas un dossier projet. Ce qui n'est pas du prompt en est sorti : les templates de fiche dans `templates/`, les préférences dans `preferences/`.
 
 | Fichier | Rôle | Où il sert |
 | --- | --- | --- |
@@ -73,7 +65,7 @@ prompt-OC/
 | `audits.md` | journal des échecs mesurés en session | ici, jamais chargé en contexte |
 | `evolution.md` | historique v1 à v8 | ici, jamais chargé en contexte |
 
-**Dans les sous-dossiers, ce qui se charge côté Claude.**
+## templates/ et preferences/
 
 | Fichier | Rôle | Où il sert |
 | --- | --- | --- |
@@ -196,7 +188,7 @@ Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correc
 
 **Un seul fichier par bloc, jamais de doublon daté.** Pas de `01-journal-v2.md`, pas de `bilan-2026-07-21.md`.
 
-**Qui tient le stylo.** La répartition bloc par bloc est dans `prompt-OC/templates/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
+**Qui tient le stylo.** La répartition bloc par bloc est dans `templates/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
 
 Une seule règle mérite d'être rappelée : `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
 
