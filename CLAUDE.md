@@ -46,6 +46,7 @@ Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseig
 CLAUDE.md        ce fichier
 ETAT.md          état du projet actif, court, à coller en Chat
 README.md        index des 12 projets
+JOURNAL-DEPOT.md ce qui est arrivé au dépôt lui-même : scripts, mises en dépôt, leçons d'outillage
 .gitattributes   fins de ligne, LF dans le dépôt, natif sur le disque
 _scripts/        génération des bilans, à réutiliser, ne pas réécrire
 _template/       blocs vierges à copier pour un nouveau projet
@@ -256,9 +257,17 @@ Rempli par Claude seul, pendant le rangement, sur faits observés uniquement.
 
 Ce qui s'y note : contradiction entre deux passages, affirmation technique douteuse ou fausse, tâche annoncée jamais faite, doublon, écart avec les pratiques pro.
 
-Ce qui ne s'y note pas : une notion que Max n'a pas encore vue (ça va dans `📚 Théorie non pratiquée`), un bug résolu (ça va dans `02-bugs.md`).
+Ce qui ne s'y note pas : une notion que Max n'a pas encore vue (ça va dans `📚 Théorie non pratiquée`), un bug résolu (ça va dans `02-bugs.md`), ce qui concerne le dépôt de notes et non le projet (ça va dans `JOURNAL-DEPOT.md`).
 
-Une ligne résolue est barrée, jamais supprimée. Ce fichier alimente `❓ Questions pour le mentor`.
+Une ligne résolue est barrée, jamais supprimée, et rejoint la section `## Résolu` en fin de fichier pour que le haut ne montre que l'actif. Ce fichier alimente `❓ Questions pour le mentor`.
+
+## JOURNAL-DEPOT.md
+
+Ce qui est arrivé à `bilan-oc` lui-même, jamais à un projet : correction de script, mise en dépôt, convention changée, leçon d'outillage, mesure de contrôle.
+
+Le test pour trancher entre les deux fichiers : si le constat disparaît à la clôture de P6, il va dans `p06/11-a-verifier.md`. S'il vaut encore pour P7, il va ici.
+
+Rempli par Claude au rangement. Une ligne résolue est barrée, jamais supprimée.
 
 ## ETAT.md
 
