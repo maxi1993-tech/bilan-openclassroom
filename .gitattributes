@@ -1,0 +1,11 @@
+# Fins de ligne : LF dans le dépôt, natif sur le disque.
+# Sans cette règle, un outil qui réécrit un fichier sous Windows le bascule
+# en CRLF et Git voit tout le fichier comme modifié.
+
+* text=auto
+
+*.md   text
+*.txt  text
+*.json text
+*.sh   text eol=lf
+*.py   text eol=lf
