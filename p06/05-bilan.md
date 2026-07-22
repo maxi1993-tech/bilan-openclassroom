@@ -3,21 +3,7 @@
 > Toute formule mathématique, tout calcul, toute méthode reproductible utilisée sur le projet.
 > Format : nom de la formule, le calcul en bloc code, puis à quoi elle sert.
 
-Aucune formule sur ce projet pour l'instant.
-
-**Exemple du format, repris de P4 OhMyFood**
-
-`interpolation linéaire` · `linear interpolation`, pour `clamp()`
-
-```
-pente = (valeur_max - valeur_min) / (largeur_max - largeur_min)
-ordonnée = valeur_min - pente × largeur_min
-→ clamp(valeur_min, calc(ordonnée_rem + pente_vw), valeur_max)
-```
-
-Sert à faire varier une taille en continu entre deux largeurs d'écran, sans media query.
-
-> **Le terme exact compte à l'oral** · interpolation, deux points et une droite exacte. Ce n'est pas une régression, qui est une approximation sur un nuage de points.
+Non applicable. Le format d'une entrée est dans `templates/fiche-template-complet.md`.
 
 ---
 
@@ -63,7 +49,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 - [x] La galerie affiche les travaux de l'API, sans doublon
 - [x] Plus aucun travail en dur dans le HTML
-- [x] Compréhension des étapes 0 à 2 contrôlée (`appendChild`, `json`, `forEach`, git, `defer`)
+- [x] Compréhension des étapes 0 à 2 contrôlée (`appendChild`, `json`, `forEach`, git, `defer`), réexpliquées avec mes mots sans le code sous les yeux
+- [x] `alt` présent sur chaque image générée
 - [x] Les filtres affichent les bonnes catégories
 - [x] Le bouton `Tous` apparaît en première position, les catégories suivent dans l'ordre de l'API
 - [x] Aucun bouton de filtre en dur, seul le `ul` conteneur est statique
@@ -216,7 +203,9 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 > **C'est le plan d'action, la seule liste ordonnée.** Le détail de chaque notion est dans `03-connaissances.md`, bloc `📚 Théorie non pratiquée`.
 
-**Priorité 1, bloquant pour l'étape 4**
+**Priorité 1, à traiter en premier à froid**
+
+> Plus rien ne bloque l'étape 4 depuis le 22-07 : l'ordre d'exécution asynchrone est acquis, prouvé par observation. Reste à le consolider.
 
 - ~~Ordre d'exécution asynchrone~~ **résolu le 22-07**, prouvé par observation. Reste à consolider à froid.
 - `async / await`, sur exo dédié hors projet. Demandé plusieurs fois en session, volontairement reporté.
@@ -233,7 +222,6 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 - `data-*` et `dataset`, à froid.
 - `map`, à froid, sur exo dédié.
 - `.catch` dans une chaîne de promesses.
-- `async / await`, croisé, pas encore pratiqué.
 
 **Priorité 3, méthode**
 
@@ -254,47 +242,47 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 ### Sur ma progression
 
-11. J'ai l'impression de ne pas m'approprier ce que je produis quand l'aide arrive trop vite. Comment le mesurer honnêtement, et que faire concrètement pour y remédier ?
+1. J'ai l'impression de ne pas m'approprier ce que je produis quand l'aide arrive trop vite. Comment le mesurer honnêtement, et que faire concrètement pour y remédier ?
 
-13. Pourquoi mon code est-il si difficile à comprendre dans son ensemble ? Je comprends à peu près chaque ligne isolément, mais le tout assemblé me paraît impossible à suivre. Est-ce normal à ce stade, un problème de structure, ou un problème de notion ?
+2. Pourquoi mon code est-il si difficile à comprendre dans son ensemble ? Je comprends à peu près chaque ligne isolément, mais le tout assemblé me paraît impossible à suivre. Est-ce normal à ce stade, un problème de structure, ou un problème de notion ?
 
-12. Peux-tu m'aider à revoir mon prompt Claude, voire m'en proposer ta version ? Le cadre actuel n'a pas tenu en session, l'aide arrive encore trop vite.
+3. Peux-tu m'aider à revoir mon prompt Claude, voire m'en proposer ta version ? Le cadre actuel n'a pas tenu en session, l'aide arrive encore trop vite.
 
 ---
 
 ### Sur l'architecture du code
 
-10. Brancher les écouteurs de clic depuis `createButtons` est imposé par le timing du `fetch`. Est-ce la pratique attendue, ou existe-t-il une organisation plus propre en agence ?
+4. Brancher les écouteurs de clic depuis `createButtons` est imposé par le timing du `fetch`. Est-ce la pratique attendue, ou existe-t-il une organisation plus propre en agence ?
 
-14. `defer` et `window.addEventListener("load", ...)` : tu utilises le second dans ton exemple, j'ai le premier. Lequel attends-tu, et pourquoi ?
+5. `defer` et `window.addEventListener("load", ...)` : tu utilises le second dans ton exemple, j'ai le premier. Lequel attends-tu, et pourquoi ?
 
-5. Le refactor de la galerie en template littéral et `insertAdjacentHTML` est-il attendu pour la soutenance, ou `createElement` reste-t-il acceptable s'il est maîtrisé ?
+6. Le refactor de la galerie en template littéral et `insertAdjacentHTML` est-il attendu pour la soutenance, ou `createElement` reste-t-il acceptable s'il est maîtrisé ?
 
-6. Deux méthodes de génération DOM dans le même fichier : acceptable si les deux sont justifiées, ou incohérence à corriger ?
+7. Deux méthodes de génération DOM dans le même fichier : acceptable si les deux sont justifiées, ou incohérence à corriger ?
 
-15. Les garder volontairement pour comparer : acceptable comme démarche d'apprentissage, ou à éviter sur un livrable ?
+8. Les garder volontairement pour comparer : acceptable comme démarche d'apprentissage, ou à éviter sur un livrable ?
 
-1. `localStorage` ou `sessionStorage` pour le token, quelle pratique attendue ?
+9. `localStorage` ou `sessionStorage` pour le token, quelle pratique attendue ?
 
 ---
 
 ### Sur la sémantique et l'accessibilité
 
-3. L'`alt` de la galerie vaut `work.title`, qui vient de l'API en anglais. Acceptable pour l'accessibilité, ou faut-il autre chose ?
+10. L'`alt` de la galerie vaut `work.title`, qui vient de l'API en anglais. Acceptable pour l'accessibilité, ou faut-il autre chose ?
 
-8. `type="button"` systématique sur les boutons hors formulaire : pratique attendue en agence, ou bruit inutile ?
+11. `type="button"` systématique sur les boutons hors formulaire : pratique attendue en agence, ou bruit inutile ?
 
-9. Un bouton de filtre actif doit-il porter une information d'état pour un lecteur d'écran, ou la classe CSS suffit-elle à ce niveau de projet ?
+12. Un bouton de filtre actif doit-il porter une information d'état pour un lecteur d'écran, ou la classe CSS suffit-elle à ce niveau de projet ?
 
-7. L'état visuel du filtre actif (`filter-selected` de la maquette) : plutôt une classe posée en JS, ou une autre approche attendue ?
+13. L'état visuel du filtre actif (`filter-selected` de la maquette) : plutôt une classe posée en JS, ou une autre approche attendue ?
 
 ---
 
 ### Sur le livrable
 
-2. Le backend fourni doit-il rester dans mon repo, ou seul le front-end est attendu comme livrable ?
+14. Le backend fourni doit-il rester dans mon repo, ou seul le front-end est attendu comme livrable ?
 
-4. GitHub Pages : `index.html` est dans `FrontEnd/`. Quelle structure recommandée, remonter à la racine ou dossier `docs/` ?
+15. GitHub Pages : `index.html` est dans `FrontEnd/`. Quelle structure recommandée, remonter à la racine ou dossier `docs/` ?
 
 ---
 

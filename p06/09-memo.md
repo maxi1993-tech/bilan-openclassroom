@@ -120,7 +120,6 @@
 | Terme | Définition |
 | --- | --- |
 | `git graph` | vue arborescente de l'historique Git, montre branches, merges et divergences. Extension VS Code, ou `git log --graph --oneline --all` |
-| `jsbench` | outil en ligne de mesure de performance JavaScript, compare la vitesse de plusieurs écritures d'un même traitement |
 | `PID` | identifiant numérique d'un processus en cours d'exécution |
 | `axe DevTools` | extension navigateur d'audit d'accessibilité automatisé |
 | `Lighthouse` | audit intégré à Chrome : performance, accessibilité, bonnes pratiques, SEO |

@@ -135,7 +135,9 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 **Code**
 
 - [ ] `filterButtonSelected` déclarée dans `listenFilterButtons`, jamais utilisée. Servira à la ligne 6 du pseudocode.
-- [ ] Restructurer le repo pour GitHub Pages. `index.html` est dans `FrontEnd/`, Pages sert la racine.
+- [ ] Restructurer le repo pour GitHub Pages. `index.html` est dans `FrontEnd/`, Pages est réglé sur `main` et `/ (root)`, ne trouve pas `index.html`, n'affiche rien. Deux pistes, à m'expliquer avant d'agir : faire remonter le contenu de `FrontEnd/` à la racine avec `git mv`, sans toucher à `Backend/`, le plus propre · ou renommer `FrontEnd/` en `docs/`, que Pages sait servir, moins propre.
+
+> **Sans urgence** · même en ligne, la galerie restera vide, le JS appelle `http://localhost:5678` que GitHub ne peut pas faire tourner. La mise en ligne sert à passer Lighthouse en fin de projet.
 
 **Accessibilité**
 
@@ -179,19 +181,7 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 
 ### Étapes à venir
 
-6. login fonctionnel · POST des identifiants, redirection si OK, message d'erreur si KO, stockage du token
-
-7. accueil en mode connecté · bandeau noir d'édition, login devient logout, déconnexion, filtres cachés, bouton Modifier
-
-8. modale · deux zones (galerie de suppression, formulaire d'ajout), ouverture au clic sur Modifier, fermeture par la croix et par l'extérieur, une seule modale dans le DOM, navigation interne avec flèche retour
-
-9. suppression · requête DELETE, retrait du DOM sans recharger
-
-10. formulaire d'ajout · preview à la sélection, catégories depuis l'API, message d'erreur si incomplet, envoi via `FormData`
-
-11. ajout dynamique · le projet apparaît dans les deux galeries sans recharger
-
-12. validation finale · formulaires testés avec données erronées, conformité maquette, gestion de l'interface, projet prêt pour la soutenance
+> Étapes 6 à 12, du login fonctionnel à la validation finale · le détail est dans le brief OC et le Kanban, il n'est pas recopié ici. La todo se remplit étape par étape, à l'ouverture de chacune.
 
 ---
 
@@ -738,13 +728,13 @@ Une erreur de syntaxe empêche tout le bloc de s'exécuter, y compris les lignes
 
 ---
 
-`variable du callback` · `callback parameter`
+`paramètre de callback` · `callback parameter`
 
 Le mot placé avant la flèche (`categorie =>`, `button =>`) nomme l'élément que la boucle tend à chaque tour. Sans lui, aucun moyen de l'attraper.
 
-Réaffecter cette variable (`categorie = ...`) détruit la donnée du tour en cours. Utiliser une variable dédiée.
+Réaffecter ce paramètre (`categorie = ...`) détruit la donnée du tour en cours. Utiliser une variable dédiée.
 
-> **Vu, pas acquis.** Notion donnée par Claude, pas trouvée. À reprendre sur exo dédié hors projet.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 
@@ -819,7 +809,7 @@ Affichage réel : 1, 2, 3, puis 4 en dernier, alors que le 4 est écrit avant le
 
 La chaîne `.then` est le seul endroit qui sait que la réponse est arrivée. Tout code qui dépend des données doit y être branché, directement ou via une fonction appelée depuis elle.
 
-> **Notion non acquise, priorité.** Exo dédié à froid avant de reprendre l'étape 4.
+> **Prouvé par observation le 22-07**, avec un repère de fin de fichier. Ne bloque plus l'étape 4. À consolider à froid sur exo dédié.
 
 ---
 
@@ -962,7 +952,7 @@ Se pose sur un élément qui existe déjà à l'instant où la ligne s'exécute.
 
 Range une information sur un élément HTML sans qu'elle s'affiche, et indépendamment du texte affiché. Relue en JS avec `element.dataset.nom`.
 
-> **Vu en console, non acquis.** À reprendre à froid sur exo dédié.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 
@@ -1082,7 +1072,7 @@ Recharger la page et observer le rendu est parfois plus rapide qu'un raisonnemen
 
 Affiche la liste des fonctions qui ont mené jusqu'à cette ligne. Répond à "qui a appelé cette fonction, et depuis où". Même information que les lignes `viewGallery @ script.js:6` visibles sous une erreur.
 
-> **Non pratiqué en session.** À tester en console.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 
@@ -1655,21 +1645,7 @@ Le CSS est le code réellement appliqué, la source qui fait foi.
 > Toute formule mathématique, tout calcul, toute méthode reproductible utilisée sur le projet.
 > Format : nom de la formule, le calcul en bloc code, puis à quoi elle sert.
 
-Aucune formule sur ce projet pour l'instant.
-
-**Exemple du format, repris de P4 OhMyFood**
-
-`interpolation linéaire` · `linear interpolation`, pour `clamp()`
-
-```
-pente = (valeur_max - valeur_min) / (largeur_max - largeur_min)
-ordonnée = valeur_min - pente × largeur_min
-→ clamp(valeur_min, calc(ordonnée_rem + pente_vw), valeur_max)
-```
-
-Sert à faire varier une taille en continu entre deux largeurs d'écran, sans media query.
-
-> **Le terme exact compte à l'oral** · interpolation, deux points et une droite exacte. Ce n'est pas une régression, qui est une approximation sur un nuage de points.
+Non applicable. Le format d'une entrée est dans `templates/fiche-template-complet.md`.
 
 ---
 
@@ -1715,7 +1691,8 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 - [x] La galerie affiche les travaux de l'API, sans doublon
 - [x] Plus aucun travail en dur dans le HTML
-- [x] Compréhension des étapes 0 à 2 contrôlée (`appendChild`, `json`, `forEach`, git, `defer`)
+- [x] Compréhension des étapes 0 à 2 contrôlée (`appendChild`, `json`, `forEach`, git, `defer`), réexpliquées avec mes mots sans le code sous les yeux
+- [x] `alt` présent sur chaque image générée
 - [x] Les filtres affichent les bonnes catégories
 - [x] Le bouton `Tous` apparaît en première position, les catégories suivent dans l'ordre de l'API
 - [x] Aucun bouton de filtre en dur, seul le `ul` conteneur est statique
@@ -1868,7 +1845,9 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 > **C'est le plan d'action, la seule liste ordonnée.** Le détail de chaque notion est dans `03-connaissances.md`, bloc `📚 Théorie non pratiquée`.
 
-**Priorité 1, bloquant pour l'étape 4**
+**Priorité 1, à traiter en premier à froid**
+
+> Plus rien ne bloque l'étape 4 depuis le 22-07 : l'ordre d'exécution asynchrone est acquis, prouvé par observation. Reste à le consolider.
 
 - ~~Ordre d'exécution asynchrone~~ **résolu le 22-07**, prouvé par observation. Reste à consolider à froid.
 - `async / await`, sur exo dédié hors projet. Demandé plusieurs fois en session, volontairement reporté.
@@ -1885,7 +1864,6 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 - `data-*` et `dataset`, à froid.
 - `map`, à froid, sur exo dédié.
 - `.catch` dans une chaîne de promesses.
-- `async / await`, croisé, pas encore pratiqué.
 
 **Priorité 3, méthode**
 
@@ -1906,47 +1884,47 @@ Sert à faire varier une taille en continu entre deux largeurs d'écran, sans me
 
 ### Sur ma progression
 
-11. J'ai l'impression de ne pas m'approprier ce que je produis quand l'aide arrive trop vite. Comment le mesurer honnêtement, et que faire concrètement pour y remédier ?
+1. J'ai l'impression de ne pas m'approprier ce que je produis quand l'aide arrive trop vite. Comment le mesurer honnêtement, et que faire concrètement pour y remédier ?
 
-13. Pourquoi mon code est-il si difficile à comprendre dans son ensemble ? Je comprends à peu près chaque ligne isolément, mais le tout assemblé me paraît impossible à suivre. Est-ce normal à ce stade, un problème de structure, ou un problème de notion ?
+2. Pourquoi mon code est-il si difficile à comprendre dans son ensemble ? Je comprends à peu près chaque ligne isolément, mais le tout assemblé me paraît impossible à suivre. Est-ce normal à ce stade, un problème de structure, ou un problème de notion ?
 
-12. Peux-tu m'aider à revoir mon prompt Claude, voire m'en proposer ta version ? Le cadre actuel n'a pas tenu en session, l'aide arrive encore trop vite.
+3. Peux-tu m'aider à revoir mon prompt Claude, voire m'en proposer ta version ? Le cadre actuel n'a pas tenu en session, l'aide arrive encore trop vite.
 
 ---
 
 ### Sur l'architecture du code
 
-10. Brancher les écouteurs de clic depuis `createButtons` est imposé par le timing du `fetch`. Est-ce la pratique attendue, ou existe-t-il une organisation plus propre en agence ?
+4. Brancher les écouteurs de clic depuis `createButtons` est imposé par le timing du `fetch`. Est-ce la pratique attendue, ou existe-t-il une organisation plus propre en agence ?
 
-14. `defer` et `window.addEventListener("load", ...)` : tu utilises le second dans ton exemple, j'ai le premier. Lequel attends-tu, et pourquoi ?
+5. `defer` et `window.addEventListener("load", ...)` : tu utilises le second dans ton exemple, j'ai le premier. Lequel attends-tu, et pourquoi ?
 
-5. Le refactor de la galerie en template littéral et `insertAdjacentHTML` est-il attendu pour la soutenance, ou `createElement` reste-t-il acceptable s'il est maîtrisé ?
+6. Le refactor de la galerie en template littéral et `insertAdjacentHTML` est-il attendu pour la soutenance, ou `createElement` reste-t-il acceptable s'il est maîtrisé ?
 
-6. Deux méthodes de génération DOM dans le même fichier : acceptable si les deux sont justifiées, ou incohérence à corriger ?
+7. Deux méthodes de génération DOM dans le même fichier : acceptable si les deux sont justifiées, ou incohérence à corriger ?
 
-15. Les garder volontairement pour comparer : acceptable comme démarche d'apprentissage, ou à éviter sur un livrable ?
+8. Les garder volontairement pour comparer : acceptable comme démarche d'apprentissage, ou à éviter sur un livrable ?
 
-1. `localStorage` ou `sessionStorage` pour le token, quelle pratique attendue ?
+9. `localStorage` ou `sessionStorage` pour le token, quelle pratique attendue ?
 
 ---
 
 ### Sur la sémantique et l'accessibilité
 
-3. L'`alt` de la galerie vaut `work.title`, qui vient de l'API en anglais. Acceptable pour l'accessibilité, ou faut-il autre chose ?
+10. L'`alt` de la galerie vaut `work.title`, qui vient de l'API en anglais. Acceptable pour l'accessibilité, ou faut-il autre chose ?
 
-8. `type="button"` systématique sur les boutons hors formulaire : pratique attendue en agence, ou bruit inutile ?
+11. `type="button"` systématique sur les boutons hors formulaire : pratique attendue en agence, ou bruit inutile ?
 
-9. Un bouton de filtre actif doit-il porter une information d'état pour un lecteur d'écran, ou la classe CSS suffit-elle à ce niveau de projet ?
+12. Un bouton de filtre actif doit-il porter une information d'état pour un lecteur d'écran, ou la classe CSS suffit-elle à ce niveau de projet ?
 
-7. L'état visuel du filtre actif (`filter-selected` de la maquette) : plutôt une classe posée en JS, ou une autre approche attendue ?
+13. L'état visuel du filtre actif (`filter-selected` de la maquette) : plutôt une classe posée en JS, ou une autre approche attendue ?
 
 ---
 
 ### Sur le livrable
 
-2. Le backend fourni doit-il rester dans mon repo, ou seul le front-end est attendu comme livrable ?
+14. Le backend fourni doit-il rester dans mon repo, ou seul le front-end est attendu comme livrable ?
 
-4. GitHub Pages : `index.html` est dans `FrontEnd/`. Quelle structure recommandée, remonter à la racine ou dossier `docs/` ?
+15. GitHub Pages : `index.html` est dans `FrontEnd/`. Quelle structure recommandée, remonter à la racine ou dossier `docs/` ?
 
 ---
 
@@ -2083,7 +2061,7 @@ Six commits, un sujet par commit.
 
 ### Ce qui reste à revoir
 
-> Une seule source, plus haut dans ce fichier : `➡️ À revoir, par priorité`.
+> Une seule source : `05-bilan.md`, bloc `➡️ À revoir, par priorité`.
 > Le catalogue des notions elles-mêmes est dans `03-connaissances.md`, bloc `📚 Théorie non pratiquée`.
 
 ---
@@ -2117,6 +2095,33 @@ Six commits, un sujet par commit.
 - [ ] Pourquoi les trois fonctions ont bien trois appels, et pourquoi un seul ne peut pas être déplacé
 - [ ] Pourquoi `fetchCategories()` est appelée à la main et `createButtons` non
 - [ ] Pourquoi une absence d'erreur dans la console ne prouve pas l'absence de bug
+
+**Support à reconstruire de mémoire, jamais à lire au jury**
+
+Version actuelle, qui marche.
+
+```
+t = 0 ms      fetchCategories()        le fetch part
+t = 0 ms      fin du fichier           aucun bouton dans la page
+              ... attente reseau ...
+t = 200 ms    la reponse arrive        .then appelle createButtons()
+t = 200 ms    boutons poses            insertAdjacentHTML
+t = 200 ms    listenFilterButtons()    appelee depuis createButtons
+                                       les boutons existent, ecouteurs poses
+```
+
+Les trois appels groupés en bas, qui ne marche pas.
+
+```
+t = 0 ms      fetchCategories()        le fetch part
+t = 0 ms      listenFilterButtons()    s'execute tout de suite
+                                       querySelectorAll renvoie une liste vide
+                                       forEach tourne 0 fois, aucun ecouteur
+              ... attente reseau ...
+t = 200 ms    boutons poses            trop tard, plus personne ne vient
+```
+
+> **Point unique à retenir** · entre le départ du fetch et son retour, il s'écoule un temps réel pendant lequel le fichier a déjà fini de se lire.
 
 ---
 
@@ -2280,7 +2285,6 @@ Six commits, un sujet par commit.
 | Terme | Définition |
 | --- | --- |
 | `git graph` | vue arborescente de l'historique Git, montre branches, merges et divergences. Extension VS Code, ou `git log --graph --oneline --all` |
-| `jsbench` | outil en ligne de mesure de performance JavaScript, compare la vitesse de plusieurs écritures d'un même traitement |
 | `PID` | identifiant numérique d'un processus en cours d'exécution |
 | `axe DevTools` | extension navigateur d'audit d'accessibilité automatisé |
 | `Lighthouse` | audit intégré à Chrome : performance, accessibilité, bonnes pratiques, SEO |
@@ -2302,27 +2306,9 @@ Six commits, un sujet par commit.
 
 - **Fait** · lignes 1, 2, 3 du pseudocode. Récupérer les boutons, écouter les clics, classe active par défaut sur `Tous`. Plus la restructuration du fichier en trois blocs et la gestion d'erreur.
 
-- **Restant** · lignes 4, 5, 6. Vider la galerie, la reconstruire filtrée, déplacer la classe active.
+- **Restant** · lignes 4, 5, 6 du pseudocode. Le détail cochable est dans la todo de `00-cadrage.md`, étape 4.
 
 > **Le filtre ne filtre rien.** Le clic ne fait qu'un `console.log`.
-
----
-
-### Décision de session, levée le 22-07
-
-> ~~Ne rien coder tant que l'ordre d'exécution asynchrone n'est pas compris.~~
-
-**Levée.** L'ordre d'exécution a été prouvé par observation, avec un repère de fin de fichier. Le blocage de deux sessions est résolu. Reste à consolider à froid, sans que ça bloque l'étape.
-
----
-
-### Fait le 22-07, session ordre d'exécution et gestion d'erreur
-
-- Fichier restructuré en trois blocs, `fetch` des works enveloppé dans `viewGallery`
-- Ordre d'exécution prouvé en console, blocage de deux sessions levé
-- `try / catch` testé, compris comme inopérant sur l'asynchrone, retiré
-- `.catch` posé sur les deux fetch, vérifié back-end coupé
-- Deux commits poussés · `b78f0d1`, `87ad631`
 
 ---
 
@@ -2348,72 +2334,9 @@ Relancer le backend · `cd Backend`, puis `npm start`. Sinon `fetch` échoue.
 
 ---
 
-### Visuel à reconstruire de mémoire
-
-**Version actuelle, qui marche**
-
-```
-t = 0 ms      fetchCategories()        le fetch part
-t = 0 ms      fin du fichier           aucun bouton dans la page
-              ... attente reseau ...
-t = 200 ms    la reponse arrive        .then appelle createButtons()
-t = 200 ms    boutons poses            insertAdjacentHTML
-t = 200 ms    listenFilterButtons()    appelee depuis createButtons
-                                       les boutons existent, ecouteurs poses
-```
-
-**Les trois appels groupés en bas, qui ne marche pas**
-
-```
-t = 0 ms      fetchCategories()        le fetch part
-t = 0 ms      listenFilterButtons()    s'execute tout de suite
-                                       querySelectorAll renvoie une liste vide
-                                       forEach tourne 0 fois, aucun ecouteur
-              ... attente reseau ...
-t = 200 ms    boutons poses            trop tard, plus personne ne vient
-```
-
-> **Point unique à retenir** · entre le départ du fetch et son retour, il s'écoule un temps réel pendant lequel le fichier a déjà fini de se lire.
-
----
-
 ### État Git
 
-> Le détail des commits et l'état de la branche sont dans `06-git.md`. Ne pas les recopier ici.
-
----
-
-### Vérifications non faites, à rattraper
-
-- Navigation clavier et focus visible sur les boutons générés
-- Contraste de l'état actif
-- axe DevTools
-- `git diff` non relu avant le commit du CSS, proposé et écarté sur le moment
-
----
-
-### Notions restant à découvrir
-
-**Priorité** · `async / await` · `event.target`
-
-**Pour l'étape 4** · `innerHTML` pour vider un conteneur · filtrage d'un tableau
-
-**Plus tard** · `map` · `console.trace()` · `dataset`, vu mais non acquis · paramètre contre variable, le vocabulaire
-
-> Sortis de cette liste le 22-07 · ordre d'exécution asynchrone et `.catch`, tous deux pratiqués sur le projet.
-
----
-
-### En attente : mise en ligne GitHub Pages
-
-**Problème identifié** · `index.html` est dans `FrontEnd/`, mais Pages est réglé sur la branche `main` et le dossier `/ (root)`. Pages cherche à la racine, ne trouve pas `index.html`, n'affiche rien.
-
-**Deux pistes, à m'expliquer avant d'agir**
-
-1. Faire remonter le contenu de `FrontEnd/` à la racine du repo. Le plus propre, mais manip Git à comprendre, `git mv`, sans toucher à `Backend/`.
-2. Ou renommer `FrontEnd/` en `docs/`, que Pages sait servir. Moins propre.
-
-> **À retenir** · même en ligne, la galerie restera vide. Le JS appelle `http://localhost:5678`, un backend local que GitHub ne peut pas faire tourner. La mise en ligne sert surtout à passer Lighthouse en fin de projet, rien d'urgent.
+> Dans `06-git.md`. Ne pas recopier ici.
 
 ---
 
@@ -2431,15 +2354,9 @@ t = 200 ms    boutons poses            trop tard, plus personne ne vient
 
 - **Étape 4, ce qui est fait** · W3C sur `index.html` (0 erreur, 1 avertissement sur `#introduction`, code fourni OC), CSS validé 0 erreur, hashes de l'étape 3 relevés, pseudocode écrit, classe renommée `filter-button` dans le JS puis le CSS, `filter-button-selected` posée sur `Tous`, écouteurs branchés et vérifiés en console, lignes de debug retirées, écouteurs extraits dans `listenFilterButtons`, fichier réordonné, paramètre renommé `categories`, version `window load` du mentor testée puis écartée.
 
-- **Étape 4, session du 22-07** · fichier restructuré en trois blocs, `fetch` des works enveloppé dans `viewGallery`, ordre d'exécution prouvé en console, `try / catch` testé puis écarté, `.catch` posé sur les deux fetch, deux commits poussés.
+- **Étape 4, session du 22-07** · fichier restructuré en trois blocs, `fetch` des works enveloppé dans `viewGallery`, `try / catch` testé puis écarté, `.catch` posé sur les deux fetch, deux commits poussés. Blocage de deux sessions levé : l'ordre d'exécution asynchrone a été prouvé par observation, avec un repère de fin de fichier. À consolider à froid, sans bloquer l'étape.
 
 - **Incidents résolus** · port 5678 occupé, diagnostiqué et résolu.
-
----
-
-### Vérifications déjà faites
-
-Galerie affiche les works de l'API, une seule fois, sans doublon · plus aucun travail en dur dans le HTML · `alt` présent sur chaque image générée · étapes 0 à 2 réexpliquées avec mes mots sans le code sous les yeux · boutons de filtre affichés dans le bon ordre, `Tous` en tête · rendu inchangé après le refactor · style limité aux boutons de filtre · `style.css` restauré à son formatage d'origine avant commit
 
 ---
 
@@ -2448,11 +2365,13 @@ Galerie affiche les works de l'API, une seule fois, sans doublon · plus aucun t
 ## 🔎 À vérifier
 
 Relevé par Claude pendant le rangement de l'inbox. Faits observés uniquement, rien d'inventé.
-Une ligne résolue est barrée, pas supprimée.
+Une ligne résolue est barrée, pas supprimée, et rejoint la section `## Résolu` en fin de fichier.
 
-Format : `[date] type : constat → où` 
+Format : `[date] type : constat → où`
 
 Types : `contradiction`, `savoir douteux`, `annoncé jamais fait`, `doublon`, `écart pratique pro`
+
+> Ce qui concerne le dépôt de notes et non le projet est dans `JOURNAL-DEPOT.md`, à la racine.
 
 ---
 
@@ -2480,63 +2399,49 @@ Types : `contradiction`, `savoir douteux`, `annoncé jamais fait`, `doublon`, `�
 
 - `[2026-07-21] perte de trace` : la version 01 gardait l'URL complète `GET http://localhost:5678/api/works` dans la chaîne `.then` type. La version 02 l'a raccourcie en `GET /api/works`. Le port 5678 reste documenté ailleurs (journal de bugs), donc rien d'utile n'est perdu, mais la fiche ne dit plus explicitement sur quelle machine tourne l'API → `03-connaissances.md`, API & fetch
 
-- ~~`[2026-07-21] annoncé jamais fait` : la version 01 listait "Bouton `Tous` actif par défaut au chargement" comme tâche de l'étape 3. La version 02 déclare l'étape 3 terminée, et cette case reste non cochée.~~ **Résolu au delta étape 4** : classe `filter-button-selected` posée sur `Tous` à la génération.
-
-- ~~`[2026-07-21] dette assumée` : la version 01 posait "Décider si la galerie est refactorée ou laissée en `createElement`". La question est reportée depuis deux versions sans décision.~~ **Tranché au delta étape 4** : les deux méthodes sont conservées volontairement, pour comparer. Décision assumée, à savoir défendre devant le jury.
-
 ---
 
 ### Relevé du 2026-07-21 (delta étape 4)
 
 - `[2026-07-21] écart cadre pédagogique` : "Claude a donné le nom et la structure de la fonction à créer, ce que le prompt interdit sur du code OC évalué. Le cadre n'a pas tenu." Fait rapporté par Max lui-même. `listenFilterButtons` est donc dans le code sans avoir été trouvée. À réapprendre sur exo dédié avant la soutenance, sous peine de ne pas savoir défendre une fonction du livrable → `05-bilan.md`, Difficultés
 
-- `[2026-07-21] formulation trompeuse` : dans les vérifications, la ligne "Les trois appels groupés en bas du fichier ne fonctionnent pas (testé, console muette)" est cochée `[x]`. Dans une checklist, `[x]` se lit "conforme". Un lecteur externe comprendra que le code ne fonctionne pas. Reformuler en "vérifié que les trois appels groupés en bas ne fonctionnent pas, preuve obtenue" → `05-bilan.md`, Vérification
-
 - `[2026-07-21] doublon` : plusieurs notions figurent à la fois dans `🧠 Nouvelles connaissances` avec la mention "Vu, pas acquis" et dans `📚 Théorie non pratiquée` (paramètre de callback dans `forEach`, `dataset`, ordre asynchrone). Cohérent sur le fond, mais deux endroits à corriger le jour où la notion est acquise. Ne pas les laisser diverger → `03-connaissances.md`
-
-- `[2026-07-21] à surveiller` : "je ne commite pas un code que je ne sais pas encore expliquer" est une bonne décision, mais l'étape 4 accumule des modifications non commitées dans `script.js` et `style.css`. Plus l'attente dure, plus le commit sera gros et difficile à découper en sujets uniques → `10-point-de-reprise.md`, État Git
-
----
-
-### Relevé du 2026-07-21 (contrôle version 01 contre bilan final)
-
-- ~~`[2026-07-21] perte de trace` : la version 01 nommait les quatre catégories réelles de l'API. Le bilan final ne les citait plus nulle part.~~ **Résolu au reformatage du 22-07** : section "Catégories du client" ajoutée dans `00-cadrage.md`, Specs techniques.
-
----
-
-### Relevé du 2026-07-22 (mise en dépôt Git du dossier de notes)
-
-- ~~`[2026-07-22] doublon` : `fiche-p6-sophie-bluel.md` est resté à la racine du dépôt alors que son contenu existe déjà en deux endroits.~~ **Résolu le 22-07** : supprimé après vérification ligne à ligne, contenu intégralement retrouvé dans les blocs de `p06/`.
-
-- ~~`[2026-07-22] doublon` : `_template/04-bilan.md` ne contient plus qu'une note "fichier remplacé".~~ **Résolu le 22-07** : supprimé.
-
-- ~~`[2026-07-22] doublon` : douze fichiers `.sauv*` hors convention dans `p06/_deltas/`.~~ **Résolu le 22-07** : supprimés après vérification ligne à ligne.
-
-> **Leçon de la session du 22-07.** Ces douze `.sauv*` étaient couverts par `.gitignore`, donc jamais suivis par Git. Claude les a présentés comme récupérables depuis l'historique : c'était faux. Avant d'annoncer qu'une suppression est réversible, vérifier que le fichier est réellement suivi, avec `git ls-files`.
-
----
-
-### Relevé du 2026-07-22 (audit général du dépôt)
-
-- ~~`[2026-07-22] renvoi cassé` : `sophie-bluel-design-tokens.md` est cité comme fiche existante dans `00-cadrage.md` et dans `10-point-de-reprise.md`, sans exister dans ce dépôt.~~ **Résolu le 22-07** : la fiche vit dans le dépôt du projet P6, avec le code. Les deux renvois précisent maintenant où elle est.
-
-- `[2026-07-22] séparateurs` : `fusionne-sous-sections.py` supprimait les `---` entre entrées, alors que le format de référence de `CLAUDE.md` les exige. **Résolu le 22-07**, commit `080fe72`. Les séparateurs manquants de `p06/` seront ajoutés au prochain passage du script.
-
-- `[2026-07-22] contenu perdu à la génération` : `build-lisible.py` n'exportait aucune ligne de `02-bugs.md`, 95 lignes absentes, et annonçait 58 bugs au lieu de 30. **Résolu le 22-07**, commit `c925252`.
-
-- `[2026-07-22] compteurs faux` : la page "En une page" du bilan lisible annonçait 0 connaissance acquise et 0 décision technique justifiée, sur 65 et 30 réelles. Le script comptait des puces `- `, absentes des blocs écrits en mots-clés. **Résolu le 22-07**, commit `5687f1c`.
 
 ---
 
 ### Relevé du 2026-07-22 (rangement du delta 04)
-
-- ~~`[2026-07-22] doublon` : l'état Git était écrit à la fois dans `06-git.md`, bloc `## État Git`, et dans `10-point-de-reprise.md`, sous-section `### État Git`. Deux sources pour la même information, susceptibles de diverger.~~ **Résolu au rangement** : `10-point-de-reprise.md` renvoie désormais à `06-git.md`, sans recopier.
 
 - `[2026-07-22] à trancher` : `01-journal.md`, sous-section `### Étape 4, à alimenter à froid`, liste encore deux questions désormais répondues plus haut dans le même bloc, "pourquoi `listenFilterButtons()` est appelée depuis `createButtons`" et "ce qui se passe entre le départ du fetch et son retour". À retirer de la liste des questions en attente, sur validation de Max.
 
 - `[2026-07-22] information contredite` : le delta annonce cinq `console.log` de debug conservés volontairement dans le commit, alors que l'historique de `10-point-de-reprise.md`, étape 4, indique "lignes de debug retirées". Les deux peuvent être vrais à des moments différents, la formulation de l'historique ne le dit pas.
 
 - `[2026-07-22] écart pédagogique relevé en session Chat, prompt v7` : six critères en échec sur la session de l'étape 4, dont deux lignes de code de projet évalué dictées (`console.log("fin du fichier")`, position et début de `.catch(`), une commande `git reset` servie toute faite, du jargon non expliqué ("zone de staging"), un visuel produit avant toute question, et une affirmation fausse sur `q` dans `git add --patch`, corrigée au message suivant. Relevé conservé ici comme fait, l'action éventuelle est du ressort du prompt.
+
+---
+
+### Relevé du 2026-07-22 (nettoyage de la fiche)
+
+- `[2026-07-22] renvoi faux` : `07-synthese.md`, `Ce qui reste à revoir`, annonçait `➡️ À revoir, par priorité` comme situé "plus haut dans ce fichier", alors que ce bloc est dans `05-bilan.md`. **Corrigé au nettoyage du 22-07.**
+
+- `[2026-07-22] doublon partiel` : `dataset` et `console.trace()` portaient un statut d'acquisition à la fois dans `🧠 Nouvelles connaissances` et dans `📚 Théorie non pratiquée`. **Corrigé au nettoyage du 22-07** : `📚` porte le statut, `🧠` explique et renvoie. `gabarit de chaîne`, annoncé comme troisième doublon, n'en était pas un : sa seconde occurrence est dans `Sorti de cette liste`, qui est un historique de sortie.
+
+---
+
+### Résolu
+
+> Lignes barrées, conservées pour la trace. Le haut du fichier ne montre que l'actif.
+
+- ~~`[2026-07-21] annoncé jamais fait` : la version 01 listait "Bouton `Tous` actif par défaut au chargement" comme tâche de l'étape 3. La version 02 déclare l'étape 3 terminée, et cette case reste non cochée.~~ **Résolu au delta étape 4** : classe `filter-button-selected` posée sur `Tous` à la génération.
+
+- ~~`[2026-07-21] dette assumée` : la version 01 posait "Décider si la galerie est refactorée ou laissée en `createElement`". La question est reportée depuis deux versions sans décision.~~ **Tranché au delta étape 4** : les deux méthodes sont conservées volontairement, pour comparer. Décision assumée, à savoir défendre devant le jury.
+
+- ~~`[2026-07-21] perte de trace` : la version 01 nommait les quatre catégories réelles de l'API. Le bilan final ne les citait plus nulle part.~~ **Résolu au reformatage du 22-07** : section "Catégories du client" ajoutée dans `00-cadrage.md`, Specs techniques.
+
+- ~~`[2026-07-22] doublon` : l'état Git était écrit à la fois dans `06-git.md`, bloc `## État Git`, et dans `10-point-de-reprise.md`, sous-section `### État Git`. Deux sources pour la même information, susceptibles de diverger.~~ **Résolu au rangement** : `10-point-de-reprise.md` renvoie désormais à `06-git.md`, sans recopier.
+
+- ~~`[2026-07-21] formulation trompeuse` : dans les vérifications, la ligne "Les trois appels groupés en bas du fichier ne fonctionnent pas (testé, console muette)" est cochée `[x]`, ce qui se lit "conforme" dans une checklist.~~ **Résolu** : la ligne vit sous `Preuve obtenue par l'échec` dans `05-bilan.md`, la reformulation demandée est faite.
+
+- ~~`[2026-07-21] à surveiller` : l'étape 4 accumule des modifications non commitées dans `script.js` et `style.css`. Plus l'attente dure, plus le commit sera gros et difficile à découper.~~ **Résolu le 22-07** : deux commits poussés, `b78f0d1` et `87ad631`, working tree propre.
 
 ---
 

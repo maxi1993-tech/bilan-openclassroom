@@ -128,7 +128,9 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 **Code**
 
 - [ ] `filterButtonSelected` déclarée dans `listenFilterButtons`, jamais utilisée. Servira à la ligne 6 du pseudocode.
-- [ ] Restructurer le repo pour GitHub Pages. `index.html` est dans `FrontEnd/`, Pages sert la racine.
+- [ ] Restructurer le repo pour GitHub Pages. `index.html` est dans `FrontEnd/`, Pages est réglé sur `main` et `/ (root)`, ne trouve pas `index.html`, n'affiche rien. Deux pistes, à m'expliquer avant d'agir : faire remonter le contenu de `FrontEnd/` à la racine avec `git mv`, sans toucher à `Backend/`, le plus propre · ou renommer `FrontEnd/` en `docs/`, que Pages sait servir, moins propre.
+
+> **Sans urgence** · même en ligne, la galerie restera vide, le JS appelle `http://localhost:5678` que GitHub ne peut pas faire tourner. La mise en ligne sert à passer Lighthouse en fin de projet.
 
 **Accessibilité**
 
@@ -172,19 +174,7 @@ Galerie et filtres sont générés dynamiquement. Plus aucun travail ni bouton d
 
 ### Étapes à venir
 
-6. login fonctionnel · POST des identifiants, redirection si OK, message d'erreur si KO, stockage du token
-
-7. accueil en mode connecté · bandeau noir d'édition, login devient logout, déconnexion, filtres cachés, bouton Modifier
-
-8. modale · deux zones (galerie de suppression, formulaire d'ajout), ouverture au clic sur Modifier, fermeture par la croix et par l'extérieur, une seule modale dans le DOM, navigation interne avec flèche retour
-
-9. suppression · requête DELETE, retrait du DOM sans recharger
-
-10. formulaire d'ajout · preview à la sélection, catégories depuis l'API, message d'erreur si incomplet, envoi via `FormData`
-
-11. ajout dynamique · le projet apparaît dans les deux galeries sans recharger
-
-12. validation finale · formulaires testés avec données erronées, conformité maquette, gestion de l'interface, projet prêt pour la soutenance
+> Étapes 6 à 12, du login fonctionnel à la validation finale · le détail est dans le brief OC et le Kanban, il n'est pas recopié ici. La todo se remplit étape par étape, à l'ouverture de chacune.
 
 ---
 

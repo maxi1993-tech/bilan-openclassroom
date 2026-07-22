@@ -71,7 +71,7 @@
 
 ### Ce qui reste à revoir
 
-> Une seule source, plus haut dans ce fichier : `➡️ À revoir, par priorité`.
+> Une seule source : `05-bilan.md`, bloc `➡️ À revoir, par priorité`.
 > Le catalogue des notions elles-mêmes est dans `03-connaissances.md`, bloc `📚 Théorie non pratiquée`.
 
 ---

@@ -45,13 +45,13 @@ Une erreur de syntaxe empêche tout le bloc de s'exécuter, y compris les lignes
 
 ---
 
-`variable du callback` · `callback parameter`
+`paramètre de callback` · `callback parameter`
 
 Le mot placé avant la flèche (`categorie =>`, `button =>`) nomme l'élément que la boucle tend à chaque tour. Sans lui, aucun moyen de l'attraper.
 
-Réaffecter cette variable (`categorie = ...`) détruit la donnée du tour en cours. Utiliser une variable dédiée.
+Réaffecter ce paramètre (`categorie = ...`) détruit la donnée du tour en cours. Utiliser une variable dédiée.
 
-> **Vu, pas acquis.** Notion donnée par Claude, pas trouvée. À reprendre sur exo dédié hors projet.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 
@@ -126,7 +126,7 @@ Affichage réel : 1, 2, 3, puis 4 en dernier, alors que le 4 est écrit avant le
 
 La chaîne `.then` est le seul endroit qui sait que la réponse est arrivée. Tout code qui dépend des données doit y être branché, directement ou via une fonction appelée depuis elle.
 
-> **Notion non acquise, priorité.** Exo dédié à froid avant de reprendre l'étape 4.
+> **Prouvé par observation le 22-07**, avec un repère de fin de fichier. Ne bloque plus l'étape 4. À consolider à froid sur exo dédié.
 
 ---
 
@@ -269,7 +269,7 @@ Se pose sur un élément qui existe déjà à l'instant où la ligne s'exécute.
 
 Range une information sur un élément HTML sans qu'elle s'affiche, et indépendamment du texte affiché. Relue en JS avec `element.dataset.nom`.
 
-> **Vu en console, non acquis.** À reprendre à froid sur exo dédié.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 
@@ -389,7 +389,7 @@ Recharger la page et observer le rendu est parfois plus rapide qu'un raisonnemen
 
 Affiche la liste des fonctions qui ont mené jusqu'à cette ligne. Répond à "qui a appelé cette fonction, et depuis où". Même information que les lignes `viewGallery @ script.js:6` visibles sous une erreur.
 
-> **Non pratiqué en session.** À tester en console.
+> **Statut dans `📚 Théorie non pratiquée`**, plus bas dans ce fichier. Une seule source pour l'acquisition.
 
 ---
 

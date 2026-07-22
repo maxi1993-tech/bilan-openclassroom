@@ -26,6 +26,33 @@
 - [ ] Pourquoi `fetchCategories()` est appelée à la main et `createButtons` non
 - [ ] Pourquoi une absence d'erreur dans la console ne prouve pas l'absence de bug
 
+**Support à reconstruire de mémoire, jamais à lire au jury**
+
+Version actuelle, qui marche.
+
+```
+t = 0 ms      fetchCategories()        le fetch part
+t = 0 ms      fin du fichier           aucun bouton dans la page
+              ... attente reseau ...
+t = 200 ms    la reponse arrive        .then appelle createButtons()
+t = 200 ms    boutons poses            insertAdjacentHTML
+t = 200 ms    listenFilterButtons()    appelee depuis createButtons
+                                       les boutons existent, ecouteurs poses
+```
+
+Les trois appels groupés en bas, qui ne marche pas.
+
+```
+t = 0 ms      fetchCategories()        le fetch part
+t = 0 ms      listenFilterButtons()    s'execute tout de suite
+                                       querySelectorAll renvoie une liste vide
+                                       forEach tourne 0 fois, aucun ecouteur
+              ... attente reseau ...
+t = 200 ms    boutons poses            trop tard, plus personne ne vient
+```
+
+> **Point unique à retenir** · entre le départ du fetch et son retour, il s'écoule un temps réel pendant lequel le fichier a déjà fini de se lire.
+
 ---
 
 ### Justifier mes choix
