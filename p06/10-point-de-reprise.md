@@ -123,7 +123,7 @@ Branche `main`, à jour avec `origin/main`.
 
 ### Historique du projet
 
-- **Cadrage** · Swagger compris, arrêt backend connu, connecteur Figma opérationnel via copie de la maquette. Fiche de design tokens produite (`sophie-bluel-design-tokens.md`).
+- **Cadrage** · Swagger compris, arrêt backend connu, connecteur Figma opérationnel via copie de la maquette. Fiche de design tokens produite (`sophie-bluel-design-tokens.md`, dans le dépôt du projet P6, pas ici).
 
 - **Notions découvertes en console, hors projet** · `fetch`, `forEach`, injection DOM, templates littéraux, `insertAdjacentHTML`, `for...of` contre `forEach`, ordre d'exécution du fetch, passage de valeur en paramètre.
 

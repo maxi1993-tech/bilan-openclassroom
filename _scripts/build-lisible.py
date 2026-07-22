@@ -27,9 +27,23 @@ for f in ["00-cadrage.md","01-journal.md","02-bugs.md","03-connaissances.md",
 
 verif = S.get("🔍 Vérification", "")
 faits = len(re.findall(r'- \[x\]', verif, re.I)); total = len(re.findall(r'- \[[ x]\]', verif, re.I))
-bugs  = len([l for l in S.get("🐛 Journal de bugs","").split("\n") if l.strip().startswith("**")])
-conn  = len([l for l in S.get("🧠 Nouvelles connaissances","").split("\n") if l.strip().startswith("- ")])
-choix = len([l for l in S.get("🔍 Choix techniques","").split("\n") if l.strip().startswith("- ")])
+def compte_entrees(txt):
+    """Compte les entrees d'un bloc, quel que soit leur format.
+    Une entree = le premier contenu non vide qui suit un '---' ou un titre '###'.
+    Compter les puces '- ' donnait 0 sur les blocs ecrits en mots-cles.
+    """
+    n, attend = 0, True
+    for l in txt.split("\n"):
+        s = l.strip()
+        if s == "---" or s.startswith("### "):
+            attend = True; continue
+        if not s or s.startswith(">"): continue
+        if attend: n += 1; attend = False
+    return n
+
+bugs  = compte_entrees(S.get("🐛 Journal de bugs",""))
+conn  = compte_entrees(S.get("🧠 Nouvelles connaissances",""))
+choix = compte_entrees(S.get("🔍 Choix techniques",""))
 todo  = S.get("✅ Todo","")
 tf, tt = len(re.findall(r'- \[x\]', todo, re.I)), len(re.findall(r'- \[[ x]\]', todo, re.I))
 

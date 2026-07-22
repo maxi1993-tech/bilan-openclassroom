@@ -57,7 +57,7 @@
 | **Vert marque** | `#1D6154` |
 | **Terracotta logo** | `#B1663C` |
 | **Fond maquette** | `#FFFEF8`, crème. Le CSS fourni est sur blanc par défaut. |
-| **Fiche dédiée** | `sophie-bluel-design-tokens.md` |
+| **Fiche dédiée** | `sophie-bluel-design-tokens.md`, dans le dépôt du projet P6, avec le code et les docs. Pas dans `bilan-oc`. |
 | **Breakpoints** | à extraire de Figma. Desktop dispo, mobile pas encore. |
 | **Animations** | à définir avec la maquette |
 

@@ -64,7 +64,7 @@
 | **Vert marque** | `#1D6154` |
 | **Terracotta logo** | `#B1663C` |
 | **Fond maquette** | `#FFFEF8`, crème. Le CSS fourni est sur blanc par défaut. |
-| **Fiche dédiée** | `sophie-bluel-design-tokens.md` |
+| **Fiche dédiée** | `sophie-bluel-design-tokens.md`, dans le dépôt du projet P6, avec le code et les docs. Pas dans `bilan-oc`. |
 | **Breakpoints** | à extraire de Figma. Desktop dispo, mobile pas encore. |
 | **Animations** | à définir avec la maquette |
 
@@ -2088,7 +2088,7 @@ Branche `main`, à jour avec `origin/main`.
 
 ### Historique du projet
 
-- **Cadrage** · Swagger compris, arrêt backend connu, connecteur Figma opérationnel via copie de la maquette. Fiche de design tokens produite (`sophie-bluel-design-tokens.md`).
+- **Cadrage** · Swagger compris, arrêt backend connu, connecteur Figma opérationnel via copie de la maquette. Fiche de design tokens produite (`sophie-bluel-design-tokens.md`, dans le dépôt du projet P6, pas ici).
 
 - **Notions découvertes en console, hors projet** · `fetch`, `forEach`, injection DOM, templates littéraux, `insertAdjacentHTML`, `for...of` contre `forEach`, ordre d'exécution du fetch, passage de valeur en paramètre.
 
@@ -2177,7 +2177,7 @@ Types : `contradiction`, `savoir douteux`, `annoncé jamais fait`, `doublon`, `�
 
 ### Relevé du 2026-07-22 (audit général du dépôt)
 
-- `[2026-07-22] renvoi cassé` : `sophie-bluel-design-tokens.md` est cité comme fiche existante dans `00-cadrage.md` (Specs techniques, Fiche dédiée) et dans `10-point-de-reprise.md` (Historique, Cadrage). Le fichier n'existe nulle part dans le dépôt. Soit il n'a jamais été mis en dépôt, soit les tokens sont ailleurs et le renvoi doit être corrigé.
+- ~~`[2026-07-22] renvoi cassé` : `sophie-bluel-design-tokens.md` est cité comme fiche existante dans `00-cadrage.md` et dans `10-point-de-reprise.md`, sans exister dans ce dépôt.~~ **Résolu le 22-07** : la fiche vit dans le dépôt du projet P6, avec le code. Les deux renvois précisent maintenant où elle est.
 
 - `[2026-07-22] séparateurs` : `fusionne-sous-sections.py` supprimait les `---` entre entrées, alors que le format de référence de `CLAUDE.md` les exige. **Résolu le 22-07**, commit `080fe72`. Les séparateurs manquants de `p06/` seront ajoutés au prochain passage du script.
 
