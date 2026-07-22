@@ -1,0 +1,12 @@
+# Sorties générées, régénérables depuis les blocs
+99-bilan-final.md
+99-bilan-final-lisible.md
+
+# Sauvegardes internes de travail
+**/.sauv*.md
+**/.sauvegarde-*.md
+
+# Système
+Thumbs.db
+.DS_Store
+.vscode/
