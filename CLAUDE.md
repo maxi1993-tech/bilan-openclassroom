@@ -1,6 +1,6 @@
 # bilan-oc, instructions de dossier
 
-Ce fichier décrit **où et comment écrire**. Le comportement pédagogique (intégrité OC, barème d'indice, ton) reste dans les instructions du projet Claude "Intégrateur Web". Ne pas dupliquer ici.
+Ce fichier décrit **où et comment écrire**. Le comportement pédagogique, intégrité OC, niveau d'aide, ton, reste dans `prompt-OC/prompt-oc-v8.md`, chargé comme instructions du projet Claude "Intégrateur Web". Ne pas dupliquer ici.
 
 ## Ce que contient ce dossier
 
@@ -11,7 +11,7 @@ README.md        index des 12 projets
 .gitattributes   fins de ligne, LF dans le dépôt, natif sur le disque
 _scripts/        génération des bilans, à réutiliser, ne pas réécrire
 _template/       blocs vierges à copier pour un nouveau projet
-_archive/        fiches d'origine avant découpage
+_archive/        vide. Réservé aux fiches d'origine d'un futur découpage.
 prompt-OC/       prompt du projet Claude, templates chargés en contexte, audits
 p01/ ... p12/    un dossier par projet
 ```
@@ -145,11 +145,9 @@ Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correc
 
 **Un seul fichier par bloc, jamais de doublon daté.** Pas de `01-journal-v2.md`, pas de `bilan-2026-07-21.md`.
 
-**Qui tient le stylo :**
+**Qui tient le stylo.** La répartition bloc par bloc est dans `prompt-OC/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
 
-- `01-journal.md` : mots de Max uniquement, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
-- `02-bugs.md`, `03-connaissances.md`, `06-git.md`, les vérifications : Claude remplit seul, faits observés uniquement, rien d'inventé.
-- `00-cadrage.md`, `05-bilan.md` : Claude propose, Max valide.
+Une seule règle mérite d'être rappelée : `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
 
 **En continu, pas en fin de projet.** Le pseudocode s'écrit avant l'étape, le bug au moment où il est résolu, la connaissance quand elle est acquise.
 
@@ -163,6 +161,7 @@ Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correc
    - répartit chaque bloc dans son fichier, en ajoutant à la suite
    - **fusionne par sous-section, jamais par étape.** Une nouvelle puce "JavaScript, bases" rejoint le `### JavaScript, bases` existant. Ne jamais créer un `### Étape N` qui redécoupe les mêmes sous-sections : au douzième delta il y aurait douze fois chaque titre. La traçabilité par étape est assurée par `_deltas/`, pas par la structure des blocs.
    - note dans `11-a-verifier.md` toute incohérence rencontrée
+   - lance `fusionne-sous-sections.py` sur les blocs touchés
    - régénère `ETAT.md`
    - vide `_inbox.md` (le fichier reste, seul le contenu part)
 
@@ -172,11 +171,13 @@ En cas de doute sur la destination d'un passage, demander plutôt que deviner.
 
 Les scripts de génération existent déjà, les réutiliser plutôt que d'en réécrire :
 
-- `bash _scripts/build-final.sh pXX` → `99-bilan-final.md`, concaténation brute
-- `python3 _scripts/build-lisible.py pXX` → `99-bilan-final-lisible.md`, version réorganisée
-- `python3 _scripts/fusionne-sous-sections.py pXX/03-connaissances.md` → fusionne les `###` de même nom
+| Script | Sortie | Quand |
+| --- | --- | --- |
+| `python3 _scripts/fusionne-sous-sections.py pXX/03-connaissances.md` | fusionne les `###` de même nom | après chaque rangement d'inbox |
+| `bash _scripts/build-final.sh pXX` | `99-bilan-final.md`, concaténation brute | sur demande, et à la clôture |
+| `python3 _scripts/build-lisible.py pXX` | `99-bilan-final-lisible.md`, version réorganisée | sur demande, et à la clôture |
 
-À lancer après chaque rangement d'inbox.
+Les deux derniers produisent une sortie régénérable : inutile de les lancer à chaque session.
 
 ## 99-bilan-final.md
 
@@ -184,7 +185,23 @@ Généré par Claude en fin de projet, sur demande, par concaténation des blocs
 
 **C'est une sortie, pas une source.** Max ne l'édite jamais : une correction se fait dans le bloc concerné, puis on régénère. Régénérable autant de fois que voulu.
 
-Après génération, vérifier qu'aucune ligne des blocs sources n'est absente du final.
+Le contrôle des lignes manquantes est décrit à la clôture d'un projet, il vaut à chaque génération.
+
+## Clôture d'un projet
+
+Quand un projet est terminé et validé, il ne reste que `99-bilan-final.md` et `99-bilan-final-lisible.md`. Tout le reste est supprimé : les douze blocs, `_inbox.md`, `_deltas/`.
+
+**Trois conditions, dans cet ordre. Aucune ne se saute.**
+
+1. **Max le déclare terminé explicitement.** Claude ne décide jamais qu'un projet est fini, même si tout semble coché.
+2. **Les deux fichiers finaux sont suivis par Git.** Ils sont actuellement dans `.gitignore` : tant que ces deux lignes y sont, la clôture supprime le projet au lieu de l'archiver. Retirer les lignes, committer, vérifier avec `git ls-files pXX/`.
+3. **Régénérer puis vérifier.** Lancer `build-final.sh` et `build-lisible.py`, puis contrôler qu'aucune ligne des blocs sources n'est absente des deux finaux. Comparaison ligne à ligne, pas au jugé.
+
+Ensuite seulement, suppression, avec confirmation de Max fichier par fichier.
+
+> **Le contrôle du point 3 n'est pas une formalité.** Une fois les blocs supprimés, ce qui manque au final est perdu.
+
+---
 
 ## 11-a-verifier.md
 
