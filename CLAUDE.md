@@ -46,7 +46,7 @@ README.md        index des 12 projets
 _scripts/        génération des bilans, à réutiliser, ne pas réécrire
 _template/       blocs vierges à copier pour un nouveau projet
 _archive/        vide. Réservé aux fiches d'origine d'un futur découpage.
-prompt-OC/       prompt du projet Claude, templates chargés en contexte, audits
+prompt-OC/       prompt du projet Claude et ses annexes
 p01/ ... p12/    un dossier par projet
 ```
 
@@ -54,15 +54,32 @@ p01/ ... p12/    un dossier par projet
 
 Le prompt qui gouverne les sessions Chat, et ses annexes. Ce dossier n'est pas un dossier projet.
 
+```
+prompt-OC/
+  prompt-oc-v8.md   version active
+  prompt-oc-v1..v7  archives
+  audits.md         journal des échecs
+  evolution.md      historique des versions
+  templates/        templates de fiche projet
+  preferences/      préférences Claude
+```
+
+**À la racine, le prompt et son histoire.**
+
 | Fichier | Rôle | Où il sert |
 | --- | --- | --- |
 | `prompt-oc-v8.md` | **version active** | instructions du projet Claude |
-| `fiche-template-minimal.md` | liste des blocs, qui les remplit | documents de contexte du projet |
-| `fiche-template-complet.md` | format exact de chaque bloc | documents de contexte du projet |
-| `preferences-personnalisees.md` | copie des préférences Claude | réglages Claude, tous projets |
+| `prompt-oc-v1.md` à `v7` | archives | ici, ne jamais modifier |
 | `audits.md` | journal des échecs mesurés en session | ici, jamais chargé en contexte |
 | `evolution.md` | historique v1 à v8 | ici, jamais chargé en contexte |
-| `prompt-oc-v1.md` à `v7` | archives | ici, ne jamais modifier |
+
+**Dans les sous-dossiers, ce qui se charge côté Claude.**
+
+| Fichier | Rôle | Où il sert |
+| --- | --- | --- |
+| `templates/fiche-template-minimal.md` | liste des blocs, qui les remplit | documents de contexte du projet |
+| `templates/fiche-template-complet.md` | format exact de chaque bloc | documents de contexte du projet |
+| `preferences/preferences-personnalisees.md` | copie des préférences Claude | réglages Claude, tous projets |
 
 **Une seule version active.** Une correction se fait dans `prompt-oc-v8.md`, jamais dans une archive. Une refonte crée `prompt-oc-v9.md` et laisse la v8 intacte.
 
@@ -179,7 +196,7 @@ Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correc
 
 **Un seul fichier par bloc, jamais de doublon daté.** Pas de `01-journal-v2.md`, pas de `bilan-2026-07-21.md`.
 
-**Qui tient le stylo.** La répartition bloc par bloc est dans `prompt-OC/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
+**Qui tient le stylo.** La répartition bloc par bloc est dans `prompt-OC/templates/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
 
 Une seule règle mérite d'être rappelée : `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
 

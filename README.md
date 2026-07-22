@@ -31,4 +31,4 @@ Pour une question théorique rapide en Chat, coller `ETAT.md`.
 
 ## prompt-OC/
 
-Le prompt du projet Claude "Intégrateur Web" et ses annexes. Version active : `prompt-oc-v8.md`. Les versions v1 à v7 sont archivées et ne se modifient jamais. Détail dans `CLAUDE.md`.
+Le prompt du projet Claude "Intégrateur Web" et ses annexes. Version active : `prompt-oc-v8.md`. Les versions v1 à v7 sont archivées et ne se modifient jamais. Les templates de fiche vivent dans `templates/`, les préférences dans `preferences/`. Détail dans `CLAUDE.md`.
