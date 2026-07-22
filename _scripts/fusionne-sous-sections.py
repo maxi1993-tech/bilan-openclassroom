@@ -29,14 +29,24 @@ def fusionne(path):
             contenu = corps[ss+1:ee]
             if not any(l.strip() for l in contenu):
                 continue
-            g.setdefault(nom, []).extend(contenu)
+            g.setdefault(nom, []).append(contenu)
         out.append(titre); out += pre
-        for nom, c in g.items():
-            c = [l for l in c if l.strip() != "---"]
-            while c and not c[0].strip(): c.pop(0)
-            while c and not c[-1].strip(): c.pop()
+        for nom, morceaux in g.items():
+            # Les '---' internes separent les entrees, CLAUDE.md les exige :
+            # on les garde. Seul le '---' de fin de morceau est retire, il est
+            # remis une seule fois a la couture entre deux morceaux fusionnes.
+            c = []
+            for m in morceaux:
+                m = list(m)
+                while m and not m[0].strip(): m.pop(0)
+                while m and not m[-1].strip(): m.pop()
+                if not m: continue
+                if m[-1].strip() != "---": m += ["", "---"]
+                if c: c.append("")
+                c += m
             out += [f"### {nom}", ""] + c + [""]
-        out += ["---", ""]
+        if out and out[-1].strip() != "---" and out[-2:] != ["---", ""]:
+            out += ["---", ""]
     txt = re.sub(r'\n{3,}', '\n\n', "\n".join(out)).rstrip() + "\n"
     open(path, "w", encoding="utf-8").write(txt)
     print("fusionne:", path)
