@@ -1,14 +1,10 @@
 # bilan-oc, instructions de dossier
 
-Ce fichier décrit **où et comment écrire**, et il fait autorité sur les sessions Cowork. Le comportement pédagogique, intégrité OC, niveau d'aide, ton, vit dans `prompt-OC/prompt-oc-v8.md` et gouverne les sessions Chat, pas celles-ci. Ne pas dupliquer ici.
+Ce fichier décrit **où et comment écrire**, et il fait autorité sur les sessions Cowork. Le comportement pédagogique (intégrité OC, niveau d'aide, ton) vit dans `prompt-OC/prompt-oc-v8.md` : c'est un fichier du dépôt, il gouverne les sessions Chat, pas celles-ci. Ne pas dupliquer ici.
 
 ## Ma mission
 
-Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseigne pas et ne guide aucun code : c'est le rôle du Chat. `prompt-OC/prompt-oc-v8.md` est un fichier de ce dépôt, pas des instructions.
-
-> **Règle de préséance.** Le prompt v8 est parfois chargé dans une session Cowork, par le projet Claude "Intégrateur Web". Dans ce dossier, il ne s'applique pas : c'est une note du dépôt, au même titre que les archives v1 à v7. Tout ce qu'il décrit au présent, poser des questions, donner des indices, faire écrire Max, tenir une session de code, s'adresse au Chat. En cas de conflit, la liste ci-dessous l'emporte.
->
-> Symptôme à reconnaître : si je m'apprête à interroger Max, à lui demander ce qu'il a essayé, ou à compléter `🧩 Pseudocode` et `🗣️ Explication` autrement qu'en recopiant le delta, je suis en train d'appliquer le prompt du Chat. Ces deux blocs se remplissent en Chat, jamais ici. Absents du delta, ils restent vides.
+Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseigne pas et ne guide aucun code : c'est le rôle du Chat.
 
 1. Ranger `_inbox.md` : le lire en entier avant de classer, archiver le brut dans `_deltas/NN-AAAA-MM-JJ-sujet.md`, répartir chaque passage dans son bloc.
 
@@ -26,7 +22,7 @@ Ce fichier gouverne les sessions Cowork, où Claude range les notes. Il n'enseig
 
 8. Réutiliser les scripts de `_scripts/`, ne pas les réécrire.
 
-9. `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés.
+9. `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
 
 10. Une information, un seul endroit : renvoyer au bloc source plutôt que recopier.
 
@@ -84,76 +80,21 @@ Le prompt qui gouverne les sessions Chat, et rien d'autre. Ce dossier n'est pas 
 
 ## Fichiers d'un projet
 
-| Fichier | Contenu |
-| --- | --- |
-| `00-cadrage.md` | mission, specs, todo, pièges, ce qu'il faut maîtriser |
-| `01-journal.md` | 🧩 Pseudocode, 🗣️ Explication ligne par ligne |
-| `02-bugs.md` | bug → cause réelle → correction |
-| `03-connaissances.md` | 🧠 Nouvelles connaissances, 📚 Théorie non pratiquée |
-| `04-choix-techniques.md` | 🔍 Choix techniques, format `décision → pourquoi` |
-| `05-bilan.md` | 📐 Formule, 📊 Validation outils, 🔍 Vérification, 📋 Bilan mentor, ❓ Questions |
-| `06-git.md` | commits, état git |
-| `07-synthese.md` | 🧭 Bilan technique : ce que je maîtrise, erreurs récurrentes, découvertes |
-| `08-soutenance.md` | seulement si le projet est évalué en soutenance |
-| `09-memo.md` | 💡 Tips par concept, 📖 Lexique |
-| `10-point-de-reprise.md` | où j'en suis, détaillé |
-| `11-a-verifier.md` | incohérences et savoirs douteux relevés au rangement |
-| `_inbox.md` | zone de dépôt brute, vidée après rangement |
-| `_deltas/` | deltas d'origine archivés, numérotés |
+La liste des blocs, leur contenu et qui les remplit : `templates/fiche-template-minimal.md`. Le format exact de chaque bloc, tableaux et sous-sections : `templates/fiche-template-complet.md`. Source unique, ne pas recopier ici.
+
+S'y ajoutent dans chaque `pXX/` : `_inbox.md`, zone de dépôt brute vidée après rangement, et `_deltas/`, deltas d'origine archivés et numérotés.
 
 Un projet peut demander un bloc en plus. Le proposer à Max, jamais l'ajouter en silence.
 
 ## Une information, un seul endroit
 
-Trois blocs parlent de ce qui reste à apprendre. Ils ne se répètent pas, ils ont chacun un rôle :
-
-| Bloc | Rôle |
-| --- | --- |
-| `03-connaissances.md`, 📚 Théorie non pratiquée | **le catalogue** des notions non acquises, avec ce qui a été vu |
-| `05-bilan.md`, ➡️ À revoir, par priorité | **le plan d'action**, l'ordre dans lequel les traiter |
-| `07-synthese.md`, Ce qui reste à revoir | **un renvoi**, jamais une liste |
-
-Même principe pour les tips :
-
-| Bloc | Rôle |
-| --- | --- |
-| `03-connaissances.md` | **explique** la notion, une fois pour toutes |
-| `09-memo.md`, 💡 Tips | **prescrit** un réflexe, à éviter et à faire. N'explique jamais. |
+Trois blocs parlent de ce qui reste à apprendre, chacun un rôle, sans recouvrement. Même principe pour les tips : `03-connaissances.md` explique, `09-memo.md` prescrit. La répartition exacte est dans `templates/fiche-template-minimal.md`, section "Trois blocs, trois rôles, sans recouvrement".
 
 Quand une information existe déjà ailleurs, renvoyer au bloc source plutôt que la recopier.
 
-## Mise en page, format de référence
+## Règles d'écriture
 
-Le format ci-dessous s'applique à tous les blocs sauf `01-journal.md`, qui contient les mots de Max et ne se reformate pas.
-
-### Entrée de connaissance ou de tip
-
-Mot-clé français, point médian, mot-clé anglais, les deux en `code`. Puis une ou deux phrases en prose. Puis un séparateur `---`.
-
-```
-`portée des variables` · `scope`
-
-Une variable déclarée dans un bloc n'existe pas en dehors. L'instruction qui l'utilise doit vivre dans le même bloc.
-
-> **Vu, pas acquis.** À reprendre sur exo dédié.
-
----
-```
-
-### Entrée de bug
-
-Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correction en puces, preuve en encadré.
-
-```
-**`Cannot read properties of null`**
-
-- **Cause** · le `querySelector` s'exécute avant que l'élément existe.
-- **Correction** · déplacer la récupération après la création.
-
-> Preuve en console · un `console.log` immédiat affiche `null`.
-
----
-```
+Le format des entrées (mot-clé `français` · `english`, prose, encadré, séparateur `---`) est décrit dans `templates/fiche-template-minimal.md`, section "Format d'écriture", et bloc par bloc dans `templates/fiche-template-complet.md`. Restent ici les règles qui ne sont écrites nulle part ailleurs.
 
 ### Puces et numérotation
 
@@ -176,26 +117,15 @@ Symptôme en gras avec le message d'erreur exact en `code`, puis cause et correc
 
 ### Ce qui est interdit
 
-- Tiret cadratin `—` et demi-cadratin `–`, partout.
 - Pavé de plus de cinq lignes sans respiration.
 - Mention répétée à chaque ligne (`[à valider]` fois soixante). La poser une fois en tête de bloc.
 - Sous-section `### Étape N` qui redécoupe des sous-sections déjà existantes.
 
-## Règles d'écriture
-
-**Jamais de tiret cadratin ni demi-cadratin** (`—`, `–`), dans les fichiers comme dans les réponses. Utiliser `→`, le point médian `·`, la virgule, les deux-points ou les parenthèses.
-
-**Mots-clés en français puis en anglais**, séparés par un point médian, entourés de `code` : `portée des variables` · `scope`. Le français pour comprendre, l'anglais pour chercher sur MDN.
-
-**Une ligne vide entre chaque entrée.** Pas de listes compactes.
-
-**Additionner, jamais écraser.** Un nouveau contenu s'ajoute à la suite du bloc existant. Rien de ce qui est déjà écrit ne disparaît.
+### Règles de tenue des fichiers
 
 **Un seul fichier par bloc, jamais de doublon daté.** Pas de `01-journal-v2.md`, pas de `bilan-2026-07-21.md`.
 
 **Qui tient le stylo.** La répartition bloc par bloc est dans `templates/fiche-template-minimal.md`, colonne "Qui écrit". Source unique, ne pas la recopier ici.
-
-Une seule règle mérite d'être rappelée : `01-journal.md` ne contient que les mots de Max, orthographe corrigée, jamais reformulés. Claude pose la question, Max écrit. Pas de réponse, le bloc reste vide.
 
 **En continu, pas en fin de projet.** Le pseudocode s'écrit avant l'étape, le bug au moment où il est résolu, la connaissance quand elle est acquise.
 
