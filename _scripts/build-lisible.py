@@ -47,6 +47,37 @@ choix = compte_entrees(S.get("🔍 Choix techniques",""))
 todo  = S.get("✅ Todo","")
 tf, tt = len(re.findall(r'- \[x\]', todo, re.I)), len(re.findall(r'- \[[ x]\]', todo, re.I))
 
+# Theorie non pratiquee : le stock actuel, sans la sous-section
+# "Sorti de cette liste" qui est un historique de sortie, pas un stock.
+theorie = re.split(r'^### Sorti', S.get("📚 Théorie non pratiquée",""),
+                   flags=re.M)[0]
+theo = compte_entrees(theorie)
+
+def progression_deltas():
+    """Compte par delta les puces ajoutees en 🧠 et listees en 📚.
+    Date lue dans le nom NN-AAAA-MM-JJ-sujet, "a completer" sinon :
+    sans date, le compteur est un stock deguise en courbe.
+    Les puces du Lexique d'un delta ne comptent pas comme theorie."""
+    import glob as _glob
+    lignes = []
+    for chemin in sorted(_glob.glob(os.path.join("_deltas", "*.md"))):
+        nom = os.path.basename(chemin)
+        m = re.match(r'(\d+)-(\d{4}-\d{2}-\d{2})?', nom)
+        num = m.group(1) if m else nom
+        date = (m.group(2) if m and m.group(2) else "à compléter")
+        txt = open(chemin, encoding="utf-8").read()
+        def compte(emoji):
+            m2 = re.search(r'^## [^\n]*' + emoji + r'[^\n]*\n(.*?)(?=^## |\Z)',
+                           txt, re.S | re.M)
+            if not m2:
+                return 0
+            corps = re.split(r'^\*\*Lexique', m2.group(1), flags=re.M)[0]
+            return len(re.findall(r'^- ', corps, re.M))
+        lignes.append((num, date, compte("🧠"), compte("📚")))
+    return lignes
+
+prog = progression_deltas()
+
 def bugs_table(txt):
     """Rend le journal de bugs en tableaux, un par sous-section ###.
     Accents evites dans ce docstring, pas dans la sortie.
@@ -140,8 +171,17 @@ A(f"""# {P.upper()}, bilan de projet
 | **Vérifications** | {faits} / {total} validées |
 | **Bugs résolus et documentés** | {bugs} |
 | **Connaissances acquises** | {conn} |
+| **Théorie non pratiquée, encore en attente** | {theo} |
 | **Décisions techniques justifiées** | {choix} |
-
+""")
+if prog:
+    A("\n### Progression par delta\n")
+    A("> Connaissances acquises (`🧠`) contre théorie ajoutée à la file (`📚`), delta par delta. Un delta sans date de session porte `à compléter`.\n")
+    A("| Delta | Date | Acquis `🧠` | En attente `📚` |")
+    A("| --- | --- | --- | --- |")
+    for num, date, ac, en in prog:
+        A(f"| {num} | {date} | {ac} | {en} |")
+A("""
 ---
 
 ## 1. Mission et périmètre
@@ -180,5 +220,23 @@ A("\n### Point de reprise\n"); A(S.get("📝 Point de reprise",""))
 if S.get("🔎 À vérifier","").strip():
     A("\n### À vérifier, relevé au rangement\n"); A(S.get("🔎 À vérifier",""))
 
-open("99-bilan-final-lisible.md","w",encoding="utf-8").write("\n".join(p).rstrip()+"\n")
+texte = "\n".join(p).rstrip() + "\n"
+
+def ancre(titre):
+    """Ancre markdown a la GitHub : minuscules, ponctuation retiree,
+    espaces en tirets, accents conserves. Marche sur GitHub et VS Code."""
+    t = re.sub(r'[^\w\s-]', '', titre.lower())
+    return re.sub(r'\s+', '-', t.strip())
+
+# Sommaire : construit sur les titres ## reellement presents, insere
+# avant le premier d'entre eux. Point d'entree du document.
+titres = [l[3:].strip() for l in texte.split("\n") if l.startswith("## ")]
+sommaire = ["## Sommaire", ""]
+sommaire += [f"{n}. [{t}](#{ancre(t)})" for n, t in enumerate(titres, 1)]
+sommaire += ["", "---", ""]
+lignes = texte.split("\n")
+i = next(n for n, l in enumerate(lignes) if l.startswith("## "))
+texte = "\n".join(lignes[:i] + sommaire + lignes[i:])
+
+open("99-bilan-final-lisible.md","w",encoding="utf-8").write(texte)
 print("genere", P + "/99-bilan-final-lisible.md")
