@@ -151,16 +151,7 @@
 
 ---
 
-### Étape 4
-
-**`Cannot read properties of null (reading 'forEach')`**
-
-- **Cause** · `querySelector` des boutons placé en haut du fichier, exécuté avant le retour du `fetch`, donc avant que les boutons existent.
-- **Correction** · déplacer la récupération dans `createButtons`, après les `insertAdjacentHTML`.
-
-> Preuve obtenue en console · un `console.log` au chargement affiche `null`, le même dans un `setTimeout` de 2 secondes affiche le bouton.
-
----
+### Étape 4 · écouteurs et fonctions
 
 **`filterButton is not defined`**
 
@@ -221,6 +212,17 @@
 
 ---
 
+### Étape 4 · chronologie asynchrone
+
+**`Cannot read properties of null (reading 'forEach')`**
+
+- **Cause** · `querySelector` des boutons placé en haut du fichier, exécuté avant le retour du `fetch`, donc avant que les boutons existent.
+- **Correction** · déplacer la récupération dans `createButtons`, après les `insertAdjacentHTML`.
+
+> Preuve obtenue en console · un `console.log` au chargement affiche `null`, le même dans un `setTimeout` de 2 secondes affiche le bouton.
+
+---
+
 **Console muette, aucune erreur** · `listenFilterButtons()` appelée en bas du fichier
 
 - **Cause** · la ligne s'exécute avant le retour du `fetch`. `querySelectorAll` ne trouve rien, le `forEach` tourne zéro fois.
@@ -229,6 +231,24 @@
 > **Absence d'erreur ne veut pas dire absence de bug.** Le bug le plus long de l'étape 4 n'a produit aucun message rouge.
 
 ---
+
+**`try / catch` autour des appels de lancement, `console.error` jamais affiché** · aucun message d'erreur, aucun `attrapé`
+
+- **Cause** · le bloc `try / catch` s'exécute et se referme à t = 0. Les erreurs du fetch arrivent à t = 200 ms, quand plus rien n'écoute.
+- **Correction** · `.catch()` accroché à la chaîne des `.then`.
+
+> Preuve obtenue en console, hors projet · `try { console.log("dans le try"); alerteInexistante() } catch (e) { console.log("attrapé") }` affiche `attrapé`. La même chose avec l'erreur enfermée dans un `setTimeout` de 1 seconde ne l'affiche pas.
+
+---
+
+**`try / catch` refermé autour d'une déclaration de fonction** · sortie console identique aux essais précédents
+
+- **Cause** · un bloc de déclarations n'exécute rien, donc rien à attraper.
+- **Correction** · sujet clos, `.catch` retenu.
+
+---
+
+### Étape 4 · méthode et observation
 
 **`console.log` écrit autour de l'appel au lieu d'être dans la fonction** · `console.log(viewGallery())`
 
@@ -246,15 +266,6 @@
 
 ---
 
-**`try / catch` autour des appels de lancement, `console.error` jamais affiché** · aucun message d'erreur, aucun `attrapé`
-
-- **Cause** · le bloc `try / catch` s'exécute et se referme à t = 0. Les erreurs du fetch arrivent à t = 200 ms, quand plus rien n'écoute.
-- **Correction** · `.catch()` accroché à la chaîne des `.then`.
-
-> Preuve obtenue en console, hors projet · `try { console.log("dans le try"); alerteInexistante() } catch (e) { console.log("attrapé") }` affiche `attrapé`. La même chose avec l'erreur enfermée dans un `setTimeout` de 1 seconde ne l'affiche pas.
-
----
-
 **Appels de lancement déplacés dans `createButtons`** · plus rien ne démarre
 
 - **Cause** · déplacement de bloc au jugé, sans repartir de la chronologie.
@@ -262,16 +273,17 @@
 
 ---
 
-**`try / catch` refermé autour d'une déclaration de fonction** · sortie console identique aux essais précédents
-
-- **Cause** · un bloc de déclarations n'exécute rien, donc rien à attraper.
-- **Correction** · sujet clos, `.catch` retenu.
-
----
+### Étape 4 · Git
 
 **`git add --patch` puis `q`, blocs déjà stagés conservés**
 
 - **Cause** · `q` quitte l'outil mais ne dé-stage pas ce qui a été validé avec `y`. Information donnée à tort en session comme étant l'inverse.
 - **Correction** · `git reset` vide la zone de préparation sans toucher aux fichiers.
+
+---
+
+### Étape 4 · synthèse
+
+> Les erreurs qui reviennent sur ces seize bugs sont synthétisées dans `07-synthese.md`, section `Erreurs qui reviennent`.
 
 ---

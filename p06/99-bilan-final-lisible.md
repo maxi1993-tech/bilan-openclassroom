@@ -1,7 +1,22 @@
 # P06, bilan de projet
 
-*Version lisible, générée le 2026-07-22. Réorganisée pour la lecture, contenu non reformulé.*
+*Version lisible, générée le 2026-07-23. Réorganisée pour la lecture, contenu non reformulé.*
 *Source : les blocs de `p06/`. Ne pas éditer ce fichier, éditer les blocs.*
+
+---
+
+## Sommaire
+
+1. [En une page](#en-une-page)
+2. [1. Mission et périmètre](#1-mission-et-périmètre)
+3. [2. Décisions techniques](#2-décisions-techniques)
+4. [3. Ce que j'ai appris](#3-ce-que-jai-appris)
+5. [4. Bugs, cause et correction](#4-bugs-cause-et-correction)
+6. [5. Mes explications](#5-mes-explications)
+7. [6. Ce que je maîtrise, ce qui reste](#6-ce-que-je-maîtrise-ce-qui-reste)
+8. [7. Questions pour le mentor](#7-questions-pour-le-mentor)
+9. [8. Tips et lexique](#8-tips-et-lexique)
+10. [9. Annexes](#9-annexes)
 
 ---
 
@@ -13,7 +28,20 @@
 | **Vérifications** | 19 / 30 validées |
 | **Bugs résolus et documentés** | 36 |
 | **Connaissances acquises** | 78 |
+| **Théorie non pratiquée, encore en attente** | 10 |
 | **Décisions techniques justifiées** | 39 |
+
+
+### Progression par delta
+
+> Connaissances acquises (`🧠`) contre théorie ajoutée à la file (`📚`), delta par delta. Un delta sans date de session porte `à compléter`.
+
+| Delta | Date | Acquis `🧠` | En attente `📚` |
+| --- | --- | --- | --- |
+| 01 | à compléter | 42 | 4 |
+| 02 | à compléter | 68 | 6 |
+| 03 | à compléter | 20 | 4 |
+| 04 | 2026-07-22 | 15 | 8 |
 
 ---
 
@@ -1043,11 +1071,10 @@ En anglais, un nom qui en qualifie un autre reste au singulier : `filter buttons
 | **`git diff` illisible** · `style.css` entièrement reformaté à la sauvegarde | formatage automatique de l'éditeur, déjà rencontré en P4. | fichier restauré à son formatage d'origine avant commit. |  |
 | **Piège identifié, pas vécu** · repéré sur l'exemple du mentor |  |  | `innerHTML =` à l'intérieur d'une boucle écrase le contenu à chaque tour, seul le dernier élément reste affiché. **Deux solutions** · empiler dans une variable avec `+=` puis injecter une seule fois après la boucle, ou utiliser `insertAdjacentHTML` qui ajoute sans écraser. |
 
-#### Étape 4
+#### Étape 4 · écouteurs et fonctions
 
 | Bug observé | Cause réelle | Correction | Note |
 | --- | --- | --- | --- |
-| **`Cannot read properties of null (reading 'forEach')`** | `querySelector` des boutons placé en haut du fichier, exécuté avant le retour du `fetch`, donc avant que les boutons existent. | déplacer la récupération dans `createButtons`, après les `insertAdjacentHTML`. | Preuve obtenue en console · un `console.log` au chargement affiche `null`, le même dans un `setTimeout` de 2 secondes affiche le bouton. |
 | **`filterButton is not defined`** | la variable est déclarée dans `createButtons`, la ligne qui l'utilise était restée en bas du fichier. | déplacer l'instruction dans le même bloc que la déclaration. Même règle de portée que celle déjà notée depuis P5. |  |
 | **`filterButton.forEach is not a function`** | `querySelector` ne renvoie qu'un seul élément, pas une liste. | `querySelectorAll`, qui renvoie une `NodeList` parcourable. | Vérifié en console · un `button` d'un côté, `NodeList(4)` de l'autre. |
 | **`addEventListener: 2 arguments required, but only 1 present`** | appel écrit sans son deuxième argument, la fonction à exécuter. |  |  |
@@ -1056,13 +1083,33 @@ En anglais, un nom qui en qualifie un autre reste au singulier : `filter buttons
 | **Style disparu** · classe renommée `filter-button` dans le JS sans reporter dans le CSS | répétition exacte du bug de l'étape 3, sélecteur corrigé mais pas la classe. | report fait en session suivante. |  |
 | **Boucle infinie** · `createButtons()` écrit à la fin de `createButtons` | la fonction s'appelait elle-même. Bouton `Tous` reposé, puis plantage faute de données. | écrire le nom de la fonction voulue, pas celui de la fonction courante. |  |
 | **`undefined` dans la console** · `console.log(listenFilterButtons())` | ce n'est pas une erreur. C'est ce que renvoie une fonction qui ne retourne rien, règle déjà notée à l'étape 2. | retirer le `console.log` autour, garder l'appel seul. |  |
+
+#### Étape 4 · chronologie asynchrone
+
+| Bug observé | Cause réelle | Correction | Note |
+| --- | --- | --- | --- |
+| **`Cannot read properties of null (reading 'forEach')`** | `querySelector` des boutons placé en haut du fichier, exécuté avant le retour du `fetch`, donc avant que les boutons existent. | déplacer la récupération dans `createButtons`, après les `insertAdjacentHTML`. | Preuve obtenue en console · un `console.log` au chargement affiche `null`, le même dans un `setTimeout` de 2 secondes affiche le bouton. |
 | **Console muette, aucune erreur** · `listenFilterButtons()` appelée en bas du fichier | la ligne s'exécute avant le retour du `fetch`. `querySelectorAll` ne trouve rien, le `forEach` tourne zéro fois. | replacer l'appel dans `createButtons`. | **Absence d'erreur ne veut pas dire absence de bug.** Le bug le plus long de l'étape 4 n'a produit aucun message rouge. |
+| **`try / catch` autour des appels de lancement, `console.error` jamais affiché** · aucun message d'erreur, aucun `attrapé` | le bloc `try / catch` s'exécute et se referme à t = 0. Les erreurs du fetch arrivent à t = 200 ms, quand plus rien n'écoute. | `.catch()` accroché à la chaîne des `.then`. | Preuve obtenue en console, hors projet · `try { console.log("dans le try"); alerteInexistante() } catch (e) { console.log("attrapé") }` affiche `attrapé`. La même chose avec l'erreur enfermée dans un `setTimeout` de 1 seconde ne l'affiche pas. |
+| **`try / catch` refermé autour d'une déclaration de fonction** · sortie console identique aux essais précédents | un bloc de déclarations n'exécute rien, donc rien à attraper. | sujet clos, `.catch` retenu. |  |
+
+#### Étape 4 · méthode et observation
+
+| Bug observé | Cause réelle | Correction | Note |
+| --- | --- | --- | --- |
 | **`console.log` écrit autour de l'appel au lieu d'être dans la fonction** · `console.log(viewGallery())` | confusion entre observer une fonction et afficher ce qu'elle retourne. | placer le `console.log` en première instruction du corps, entre les accolades. | Preuve obtenue en console · une fonction sans `return` affiche `undefined`, règle déjà notée à l'étape 2. |
 | **Appel d'une fonction écrit à l'intérieur d'elle-même** · `function viewGallery() { console.log(viewGallery()) ... }` | répétition du bug déjà rencontré sur `createButtons`. | mettre une chaîne de texte dans le `console.log`, pas un appel. |  |
-| **`try / catch` autour des appels de lancement, `console.error` jamais affiché** · aucun message d'erreur, aucun `attrapé` | le bloc `try / catch` s'exécute et se referme à t = 0. Les erreurs du fetch arrivent à t = 200 ms, quand plus rien n'écoute. | `.catch()` accroché à la chaîne des `.then`. | Preuve obtenue en console, hors projet · `try { console.log("dans le try"); alerteInexistante() } catch (e) { console.log("attrapé") }` affiche `attrapé`. La même chose avec l'erreur enfermée dans un `setTimeout` de 1 seconde ne l'affiche pas. |
 | **Appels de lancement déplacés dans `createButtons`** · plus rien ne démarre | déplacement de bloc au jugé, sans repartir de la chronologie. | retour au fichier précédent. Réflexe à prendre : ne pas déplacer de code tant que la question posée n'est pas résolue. |  |
-| **`try / catch` refermé autour d'une déclaration de fonction** · sortie console identique aux essais précédents | un bloc de déclarations n'exécute rien, donc rien à attraper. | sujet clos, `.catch` retenu. |  |
-| **`git add --patch` puis `q`, blocs déjà stagés conservés** | `q` quitte l'outil mais ne dé-stage pas ce qui a été validé avec `y`. Information donnée à tort en session comme étant l'inverse. | `git reset` vide la zone de préparation sans toucher aux fichiers. |  |
+
+#### Étape 4 · Git
+
+| Bug observé | Cause réelle | Correction |
+| --- | --- | --- |
+| **`git add --patch` puis `q`, blocs déjà stagés conservés** | `q` quitte l'outil mais ne dé-stage pas ce qui a été validé avec `y`. Information donnée à tort en session comme étant l'inverse. | `git reset` vide la zone de préparation sans toucher aux fichiers. |
+
+#### Étape 4 · synthèse
+
+> Les erreurs qui reviennent sur ces seize bugs sont synthétisées dans `07-synthese.md`, section `Erreurs qui reviennent`.
 
 ---
 
@@ -2158,6 +2205,12 @@ Types : `contradiction`, `savoir douteux`, `annoncé jamais fait`, `doublon`, `�
 - `[2026-07-22] renvoi faux` : `07-synthese.md`, `Ce qui reste à revoir`, annonçait `➡️ À revoir, par priorité` comme situé "plus haut dans ce fichier", alors que ce bloc est dans `05-bilan.md`. **Corrigé au nettoyage du 22-07.**
 
 - `[2026-07-22] doublon partiel` : `dataset` et `console.trace()` portaient un statut d'acquisition à la fois dans `🧠 Nouvelles connaissances` et dans `📚 Théorie non pratiquée`. **Corrigé au nettoyage du 22-07** : `📚` porte le statut, `🧠` explique et renvoie. `gabarit de chaîne`, annoncé comme troisième doublon, n'en était pas un : sa seconde occurrence est dans `Sorti de cette liste`, qui est un historique de sortie.
+
+---
+
+### Relevé du 2026-07-23 (session Cowork, audit)
+
+- `[2026-07-23] perte de trace` : le tableau W3C de `05-bilan.md`, bloc `📊 Validation outils`, porte "étape 4" en colonne `Date` sur ses deux lignes. La date réelle du passage est inconnue, le delta 03 porte "Date de session inconnue, à compléter par Max". Décision de Max le 23-07 : laisser tel quel et consigner ici → `05-bilan.md`, Validation outils
 
 ---
 
